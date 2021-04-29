@@ -14,7 +14,12 @@
  * Game state.
  */
 pearlcatch.scene.Game = function() {
-
+    this.sharkInterval = 0;
+    this.sharks = [];
+    this.pearlInterval = 0;
+    this.score = [];
+    this.squidInterval = 0;
+    this.squids = [];
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -42,15 +47,17 @@ pearlcatch.scene.Game.prototype.constructor = pearlcatch.scene.Game;
 pearlcatch.scene.Game.prototype.init = function() {
     rune.scene.Scene.prototype.init.call(this);
     this.m_initBackground();
-    this.m_initPlayer();
-    this.m_initPearls();
-    this.m_initSquid();
     this.m_initWav();
 
-    // this.m_initSort();
+    this.player = new pearlcatch.entity.Fish(this.enemy);
+    this.enemy = new pearlcatch.entity.SmallShark(this.player, 100);
+    this.pearl = new pearlcatch.entity.Pearl(this.player, 100);
+    this.squid = new pearlcatch.entity.Squid(this.player, 100);
     this.cameras.getCamera(0).fillColor = "#ade8f4";
 
-
+    this.stage.addChild(this.player);
+    this.stage.addChild(this.enemy);
+    this.stage.addChild(this.squid);
     //  this.m_obj = new rune.display.Sprite(650, 650, 64, 30, "#ffffff");
     //this.stage.addChild(this.m_obj);
 
@@ -60,6 +67,7 @@ pearlcatch.scene.Game.prototype.m_initCamera = function() {
     this.m_camera = this.cameras.add(this.cameras.create());
     this.cameras.getCamera(0).fade.opacity = 1.0;
     this.cameras.getCamera(0).fade.in(1500);
+    this.cameras.getCamera(0).debug = true;
 };
 
 
@@ -87,67 +95,29 @@ pearlcatch.scene.Game.prototype.m_initWav = function() {
 };
 pearlcatch.scene.Game.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
-    //this.m_player2.y = Math.floor(Math.random() * 200) + 1;
-    this.pearl.x -= 1.5;
-    this.squid.x -= 1.5;
-    this.m_player2.x -= 1.5;
-    if (this.keyboard.pressed("RIGHT")) {
-
-        this.m_player.x += 1.5;
-        this.m_player.flippedY = false;
-        this.m_player.animations.gotoAndPlay("idle");
+    this.sharkInterval -= step;
+    if (this.keyboard.justPressed("ENTER")) {
+        this.sharkInterval = -1;
     }
-    if (this.keyboard.pressed("LEFT")) {
-
-        this.m_player.x -= 1.5;
-        this.m_player.flippedX = false;
-        this.m_player.animations.gotoAndPlay("idle");
+    if (this.sharkInterval < 0) {
+        this.sharkInterval = 5000;
+        this.createShark();
     }
-    if (this.keyboard.pressed("DOWN")) {
-        if (this.m_player.y != 687.5) {
-            this.m_player.y += 1.5;
-            this.m_player.flippedY = false;
-            this.m_player.animations.gotoAndPlay("idle");
-            console.log(this.m_player.y);
-        } else {
-            this.m_player.y = 687.5;
+    for (var i = 0; i < this.sharks.length; i++) {
+        if (this.player.hitTestObject(this.sharks[i])) {
+            console.log("game over");
         }
-
-
-
-    } else if (this.keyboard.pressed("UP")) {
-        if (this.m_player.y != 0.5) {
-            this.m_player.y -= 1.5;
-            console.log(this.application.screen.height);
-
-        } else {
-            this.m_player.y = 0.5
-
-        }
-
-        this.m_player.animations.gotoAndPlay("idle");
-
-    } else {
-        this.m_player.animations.gotoAndPlay("idle");
     }
-    if (this.m_player.hitTestObject(this.m_player2)) {
-        this.m_player2.x = this.m_player.x;
-        text = new rune.text.BitmapField("GAME OVER " + "Press enter to play again");
-        text.autoSize = true;
-        text.center = this.application.screen.center;
-        this.stage.addChild(text);
+    this.pearlInterval -= step;
+    if (this.pearlInterval < 0) {
+        this.pearlInterval = 5000;
+        this.createPearl();
     }
-    if (this.keyboard.justPressed("space")) {
-        this.application.scenes.load([new pearlcatch.scene.Game()]);
+    this.squidInterval -= step;
+    if (this.squidInterval < 0) {
+        this.squidInterval = 6000;
+        this.createSquid();
     }
-    if (this.m_player.hitTestObject(this.pearl)) {
-        this.pearl.x = this.m_player.x + 2;
-        this.application.sounds.music.volume = 0.2;
-        var catchedPearl = this.application.sounds.music.get("catch_pearl")
-
-        catchedPearl.play();
-    }
-
 };
 
 /**
@@ -156,54 +126,26 @@ pearlcatch.scene.Game.prototype.update = function(step) {
 pearlcatch.scene.Game.prototype.dispose = function() {
     rune.scene.Scene.prototype.dispose.call(this);
 };
+pearlcatch.scene.Game.prototype.createShark = function() {
 
+    var shark = new pearlcatch.entity.SmallShark();
+    shark.y = rune.util.Math.random(0, 570);
+    shark.centerY = this.player.centerY;
+    shark.x = 1280;
+    this.sharks.push(shark);
+    this.stage.addChild(shark);
+};
+pearlcatch.scene.Game.prototype.createPearl = function() {
 
-pearlcatch.scene.Game.prototype.m_initPlayer = function() {
+    var pearl = new pearlcatch.entity.Pearl();
+    pearl.y = rune.util.Math.random(0, 570);
+    pearl.x = 1280;
+    this.stage.addChild(pearl);
+};
+pearlcatch.scene.Game.prototype.createSquid = function() {
 
-    this.m_player = new rune.display.Sprite(
-        650,
-        650,
-        100,
-        48,
-        "",
-        "purplefish"
-    );
-    this.m_player2 = new rune.display.Sprite(
-        1280,
-        250,
-        225,
-        150,
-        "",
-        "small_shark"
-    );
-
-    this.m_player.animations.add("idle", [0], true);
-    this.m_player2.animations.add("idle", [0], true);
-    this.stage.addChild(this.m_player);
-    this.stage.addChild(this.m_player2);
-
-}
-pearlcatch.scene.Game.prototype.m_initPearls = function() {
-    this.pearl = new rune.display.Sprite(
-        1280,
-        100,
-        102,
-        100,
-        "",
-        "small_pearl"
-    );
-    this.stage.addChild(this.pearl);
-}
-
-pearlcatch.scene.Game.prototype.m_initSquid = function() {
-    this.squid = new rune.display.Sprite(
-        1280,
-        50,
-        300,
-        450,
-        "",
-        "large_squid"
-    );
-    this.stage.addChild(this.squid);
-
-}
+    var squid = new pearlcatch.entity.Squid();
+    squid.y = rune.util.Math.random(0, 570);
+    squid.x = 1280;
+    this.stage.addChild(squid);
+};
