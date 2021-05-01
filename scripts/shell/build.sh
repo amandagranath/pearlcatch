@@ -10,6 +10,11 @@ npx google-closure-compiler \
 --js "./../../src/scope/Manifest.js" \
 --js "./../../src/data/manifest/Resources.js" \
 -js "./../../src/entity/PurpleFish.js" \
+-js "./../../src/entity/SmallShark.js" \
+-js "./../../src/entity/MediumShark.js" \
+-js "./../../src/entity/LargeShark.js" \
+-js "./../../src/entity/Pearl.js" \
+-js "./../../src/entity/Squid.js" \
 --js "./../../src/scene/game/Game.js" \
 --js "./../../src/system/Main.js" \
 --js "./../../src/scope/Alias.js" \

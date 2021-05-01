@@ -16,9 +16,6 @@
 pearlcatch.entity.SmallShark = function(player) {
 
 
-    //this.player = player;
-    //console.log(this.player);
-
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -47,12 +44,6 @@ pearlcatch.entity.SmallShark.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
     this.hitbox.set(15, 50, 190, 70);
 
-
-
-    //  this.m_obj = new rune.display.Sprite(650, 650, 64, 30, "#ffffff");
-    //this.stage.addChild(this.m_obj);
-
-
 };
 
 
@@ -64,7 +55,6 @@ pearlcatch.entity.SmallShark.prototype.init = function() {
 
 pearlcatch.entity.SmallShark.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
-    //this.m_player2.y = Math.floor(Math.random() * 200) + 1;
 
     this.x -= 1.5;
 
