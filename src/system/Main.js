@@ -14,7 +14,7 @@ pearlcatch.system.Main = function() {
     rune.system.Main.call(this, {
         id: "com.vectorpanic.template",
         name: "cop",
-        scene: pearlcatch.scene.Menu,
+        scene: pearlcatch.scene.Game,
         resources: pearlcatch.data.Resources,
         useKeyboard: true,
         debug: true,

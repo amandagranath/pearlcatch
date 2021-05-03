@@ -16,7 +16,7 @@
 pearlcatch.entity.PearlLarge = function(player) {
 
 
-    this.largePearlScore = 100;
+    this.pearlScore = 100;
 
     //--------------------------------------------------------------------------
     // Super call

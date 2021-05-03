@@ -79,7 +79,7 @@ pearlcatch.entity.Fish.prototype.update = function(step) {
             this.y += 1.5;
             this.flippedY = false;
             this.animations.gotoAndPlay("idle");
-            console.log(this.y);
+
         } else {
             this.y = 687.5;
         }
@@ -89,7 +89,6 @@ pearlcatch.entity.Fish.prototype.update = function(step) {
     } else if (this.keyboard.pressed("UP")) {
         if (this.y != 0.5) {
             this.y -= 1.5;
-            console.log(this.application.screen.height);
 
         } else {
             this.y = 0.5

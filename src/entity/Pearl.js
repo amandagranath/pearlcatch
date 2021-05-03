@@ -14,7 +14,7 @@
  * Game state.
  */
 pearlcatch.entity.Pearl = function(player) {
-    this.smallPearlScore = 500;
+    this.pearlScore = 500;
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------

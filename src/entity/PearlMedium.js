@@ -15,7 +15,7 @@
  */
 pearlcatch.entity.PearlMedium = function(player) {
 
-    this.mediumPearlScore = 300;
+    this.pearlScore = 300;
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
