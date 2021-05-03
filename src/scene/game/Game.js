@@ -121,7 +121,7 @@ pearlcatch.scene.Game.prototype.update = function(step) {
     }
     for (var i = 0; i < this.score.length; i++) {
         if (this.player.hitTestObject(this.score[i])) {
-
+            this.stage.removeChild(this.score[i]);
             console.log("yey");
             console.log(this.score[i].pearlScore);
 
