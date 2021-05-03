@@ -127,6 +127,7 @@ pearlcatch.scene.Game.prototype.update = function(step) {
 
             this.totalScore.push(this.score[i].pearlScore);
             console.log(this.totalScore);
+
         }
     }
 
