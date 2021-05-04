@@ -18,7 +18,9 @@
   *
   * ...
   */
- pearlcatch.scene.GameOver = function() {
+ pearlcatch.scene.GameOver = function(totalScore) {
+     this.highScoreList = [];
+     this.totalScore = totalScore;
      //--------------------------------------------------------------------------
      //  Constructor call
      //--------------------------------------------------------------------------
@@ -52,6 +54,7 @@
      );
      this.m_gameOver.center = this.application.screen.center;
      this.addChild(this.m_gameOver);
+     console.log(this.totalScore);
 
  };
 

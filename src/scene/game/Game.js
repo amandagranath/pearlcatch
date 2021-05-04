@@ -128,7 +128,7 @@ pearlcatch.scene.Game.prototype.update = function(step) {
     }
     for (var i = 0; i < this.sharks.length; i++) {
         if (this.player.hitTestObject(this.sharks[i])) {
-            this.gameOver = new pearlcatch.scene.GameOver();
+            this.gameOver = new pearlcatch.scene.GameOver(this.totalScore);
             this.stage.addChild(this.gameOver);
             console.log("game over");
         }
