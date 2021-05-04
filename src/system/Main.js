@@ -13,7 +13,7 @@ pearlcatch.system.Main = function() {
      */
     rune.system.Main.call(this, {
         id: "com.vectorpanic.template",
-        name: "cop",
+        name: "pearlcatch",
         scene: pearlcatch.scene.Game,
         resources: pearlcatch.data.Resources,
         useKeyboard: true,
