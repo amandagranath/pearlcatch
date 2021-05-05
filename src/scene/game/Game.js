@@ -18,6 +18,7 @@ pearlcatch.scene.Game = function() {
     this.gameOver = null;
     this.sharkInterval = 0;
     this.sharks = [];
+    this.squids = [];
     this.pearlInterval = 0;
     this.score = [];
     this.totalScore = 0;
@@ -97,13 +98,6 @@ pearlcatch.scene.Game.prototype.m_initBackground = function() {
 
 pearlcatch.scene.Game.prototype.m_initHud = function() {
 
-    //this.cameras.getCamera(0).addChild(this.m_hud);
-
-
-
-
-
-
 };
 
 
@@ -130,7 +124,7 @@ pearlcatch.scene.Game.prototype.update = function(step) {
         if (this.player.hitTestObject(this.sharks[i])) {
             this.gameOver = new pearlcatch.scene.GameOver(this.totalScore);
             this.stage.addChild(this.gameOver);
-            console.log("game over");
+
         }
     }
     this.pearlInterval -= step;
@@ -155,6 +149,17 @@ pearlcatch.scene.Game.prototype.update = function(step) {
     if (this.squidInterval < 0) {
         this.squidInterval = 6000;
         this.createSquid();
+    }
+    for (var i = 0; i < this.squids.length; i++) {
+        if (this.player.hitTestObject(this.squids[i])) {
+            var splat = new pearlcatch.entity.Splatter();
+            splat.y = rune.util.Math.random(0, 570);
+            splat.x = rune.util.Math.random(0, 1000);
+            this.squids.splice(i, 1);
+            this.stage.addChild(splat);
+        }
+
+
     }
 };
 
@@ -223,5 +228,6 @@ pearlcatch.scene.Game.prototype.createSquid = function() {
     var squid = new pearlcatch.entity.Squid();
     squid.y = rune.util.Math.random(0, 570);
     squid.x = 1280;
+    this.squids.push(squid);
     this.stage.addChild(squid);
 };

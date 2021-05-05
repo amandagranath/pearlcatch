@@ -55,6 +55,8 @@
      this.m_gameOver.center = this.application.screen.center;
      this.addChild(this.m_gameOver);
      console.log(this.totalScore);
+     this.highScoreList.push(this.totalScore);
+     console.log(this.highScoreList);
 
  };
 
