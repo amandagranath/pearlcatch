@@ -13,8 +13,8 @@
  * 
  * Game state.
  */
- pearlcatch.entity.Power = function() {
-
+ pearlcatch.entity.Power = function(gameScope) {
+     this.gameScope = gameScope;
 
     //--------------------------------------------------------------------------
     // Super call
@@ -56,6 +56,7 @@ pearlcatch.entity.Power.prototype.init = function() {
                 scope: this,
                 oncomplete: function(obj) {
                     obj.parent.removeChild(obj);
+                    this.gameScope.power = null;
                 }
             })
         }

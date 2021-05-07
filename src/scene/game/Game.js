@@ -124,12 +124,15 @@ pearlcatch.scene.Game.prototype.update = function (step) {
         this.createSharks(this.shark_size);
     }
     for (var i = 0; i < this.sharks.length; i++) {
-        if (this.player.hitTestObject(this.sharks[i])) {
-            this.gameOver = new pearlcatch.scene.GameOver(this.totalScore);
-            this.stage.addChild(this.gameOver);
+        if (this.power == null) {
+            if (this.player.hitTestObject(this.sharks[i])) {
+                this.gameOver = new pearlcatch.scene.GameOver(this.totalScore);
+                this.stage.addChild(this.gameOver);
 
+            }
         }
     }
+
     this.pearlInterval -= step;
     if (this.pearlInterval < 0) {
         this.pearlInterval = 5000;
@@ -153,14 +156,15 @@ pearlcatch.scene.Game.prototype.update = function (step) {
         this.createSquid();
     }
     for (var i = 0; i < this.squids.length; i++) {
-        if (this.player.hitTestObject(this.squids[i])) {
-            var splat = new pearlcatch.entity.Splatter();
-            splat.y = rune.util.Math.random(0, 570);
-            splat.x = rune.util.Math.random(0, 1000);
-            this.squids.splice(i, 1);
-            this.stage.addChild(splat);
+        if (this.power == null) {
+            if (this.player.hitTestObject(this.squids[i])) {
+                var splat = new pearlcatch.entity.Splatter();
+                splat.y = rune.util.Math.random(0, 570);
+                splat.x = rune.util.Math.random(0, 1000);
+                this.squids.splice(i, 1);
+                this.stage.addChild(splat);
+            }
         }
-
     }
 
     this.starfishInterval -= step;
@@ -171,7 +175,7 @@ pearlcatch.scene.Game.prototype.update = function (step) {
 
     for (var i = 0; i < this.stars.length; i++) {
         if (this.player.hitTestObject(this.stars[i])) {
-            this.power = new pearlcatch.entity.Power();
+            this.power = new pearlcatch.entity.Power(this);
             this.stars.splice(i, 1);
             this.stage.addChildAt(this.power, 1);
         }
@@ -254,7 +258,7 @@ pearlcatch.scene.Game.prototype.createSquid = function () {
 };
 
 pearlcatch.scene.Game.prototype.createStarfish = function () {
-    var starfish = new pearlcatch.entity.Starfish();
+    var starfish = new pearlcatch.entity.Starfish(this);
     starfish.y = rune.util.Math.random(0, 570);
     starfish.x = 1280;
     this.stars.push(starfish);
