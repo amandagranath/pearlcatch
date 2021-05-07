@@ -15,7 +15,8 @@
  */
 pearlcatch.entity.Splatter = function(player) {
 
-
+    this.timers = null;
+    this.tweens = null;
     //this.player = player;
     //console.log(this.player);
 
@@ -45,6 +46,28 @@ pearlcatch.entity.Splatter.prototype.constructor = pearlcatch.entity.Splatter;
  */
 pearlcatch.entity.Splatter.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
+    this.tweens = new rune.tween.Tweens();
+    this.timers = new rune.timer.Timers();
+    this.timers.create({
+        duration: 5000,
+        scope: this,
+        onComplete: function() {
+            this.tweens.add(this, {
+                duration: 1000,
+                alpha: 0,
+                scope: this,
+                oncomplete: function(obj) {
+                    obj.parent.removeChild(obj);
+                }
+            })
+        }
+    });
+
+    this.rotation = 45;
+    this.tweens.add(this, {
+        duration: 1000,
+        rotation: 0
+    })
 
 };
 
@@ -57,7 +80,8 @@ pearlcatch.entity.Splatter.prototype.init = function() {
 
 pearlcatch.entity.Splatter.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
-
+    this.timers.update(step);
+    this.tweens.update(step);
 };
 
 /**
