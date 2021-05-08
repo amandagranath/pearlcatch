@@ -24,7 +24,6 @@ pearlcatch.scene.Game = function () {
     this.totalScore = 0;
     this.squidInterval = 0;
     this.starfishInterval = 0;
-    this.squids = [];
     this.stars = [];
     this.power = null;
     this.entity_sizes = ["small", "medium", "big"];
@@ -141,12 +140,15 @@ pearlcatch.scene.Game.prototype.update = function (step) {
     }
     for (var i = 0; i < this.score.length; i++) {
         if (this.player.hitTestObject(this.score[i])) {
+            var pearlPoints = this.score[i].pearlScore;
             this.stage.removeChild(this.score[i]);
-
             this.totalScore = this.totalScore + this.score[i].pearlScore;
-            console.log(this.totalScore);
             this.hud.score.text = this.totalScore.toString();
             this.score.splice(i, 1);
+            var displayPoints = new pearlcatch.entity.Points(this, pearlPoints);
+            displayPoints.x = this.player.x + 100;
+            displayPoints.y = this.player.y - 30;
+            this.stage.addChild(displayPoints);
         }
     }
 
@@ -176,6 +178,7 @@ pearlcatch.scene.Game.prototype.update = function (step) {
     for (var i = 0; i < this.stars.length; i++) {
         if (this.player.hitTestObject(this.stars[i])) {
             this.power = new pearlcatch.entity.Power(this);
+            this.stage.removeChild(this.stars[i], true);
             this.stars.splice(i, 1);
             this.stage.addChildAt(this.power, 1);
         }
@@ -265,7 +268,4 @@ pearlcatch.scene.Game.prototype.createStarfish = function () {
     this.stage.addChild(starfish);
 }
 
-/*pearlcatch.scene.Game.prototype.changeTotalScore = function () {
-    this.totalScore = this.totalScore - 1000;
-    this.hud.score.text = this.totalScore.toString();
-}*/
+

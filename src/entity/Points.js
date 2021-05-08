@@ -13,8 +13,9 @@
  * 
  * Game state.
  */
-pearlcatch.entity.Starfish = function (gameScope) {
+pearlcatch.entity.Points = function (gameScope, points) {
     this.gameScope = gameScope;
+    this.points = points;
 
 
     //--------------------------------------------------------------------------
@@ -24,15 +25,30 @@ pearlcatch.entity.Starfish = function (gameScope) {
     /**
      * ...
      */
-    rune.display.Sprite.call(this, 0, 0, 50, 48, "", "sjostjarna");
+
+    if (this.points == 500) {
+        rune.display.Sprite.call(this, 0, 0, 75, 20, "", "500_points");
+    }
+
+    if (this.points == 300) {
+        rune.display.Sprite.call(this, 0, 0, 75, 19, "", "300_points");
+    }
+
+    if (this.points == 100) {
+        rune.display.Sprite.call(this, 0, 0, 71, 19, "", "100_points");
+    }
+
+    if (this.points == 1000) {
+        rune.display.Sprite.call(this, 0, 0, 71, 19, "", "1000_minus");
+    }
 };
 
 //------------------------------------------------------------------------------
 // Inheritance
 //------------------------------------------------------------------------------
 
-pearlcatch.entity.Starfish.prototype = Object.create(rune.display.Sprite.prototype);
-pearlcatch.entity.Starfish.prototype.constructor = pearlcatch.entity.Starfish;
+pearlcatch.entity.Points.prototype = Object.create(rune.display.Sprite.prototype);
+pearlcatch.entity.Points.prototype.constructor = pearlcatch.entity.Points;
 
 //------------------------------------------------------------------------------
 // Override public prototype methods (ENGINE)
@@ -43,9 +59,8 @@ pearlcatch.entity.Starfish.prototype.constructor = pearlcatch.entity.Starfish;
  */
 
 
-pearlcatch.entity.Starfish.prototype.init = function () {
+pearlcatch.entity.Points.prototype.init = function () {
     rune.display.Sprite.prototype.init.call(this);
-    this.hitbox.set(0, 0, 50, 48);
     this.tweens = new rune.tween.Tweens();
     this.timers = new rune.timer.Timers();
     this.timers.create({
@@ -53,17 +68,11 @@ pearlcatch.entity.Starfish.prototype.init = function () {
         scope: this,
         onComplete: function () {
             this.tweens.add(this, {
-                duration: 5000,
+                duration: 1000,
                 alpha: 0,
                 scope: this,
                 oncomplete: function (obj) {
                     obj.parent.removeChild(obj);
-                    this.gameScope.totalScore = this.gameScope.totalScore += -1000;
-                    this.gameScope.hud.score.text = this.gameScope.totalScore.toString();
-                    var displayPoints = new pearlcatch.entity.Points(this, 1000);
-                    this.gameScope.stage.addChild(displayPoints);
-                    displayPoints.x = 800;
-                    displayPoints.y = 50;
                 }
             })
         }
@@ -76,8 +85,7 @@ pearlcatch.entity.Starfish.prototype.init = function () {
  */
 
 
-pearlcatch.entity.Starfish.prototype.update = function (step) {
-    this.x -= 1.5;
+pearlcatch.entity.Points.prototype.update = function (step) {
     this.timers.update(step);
     this.tweens.update(step);
 };
@@ -85,6 +93,6 @@ pearlcatch.entity.Starfish.prototype.update = function (step) {
 /**
  * @inheritDoc
  */
-pearlcatch.entity.Starfish.prototype.dispose = function () {
+pearlcatch.entity.Points.prototype.dispose = function () {
     rune.display.Sprite.prototype.dispose.call(this);
 };
