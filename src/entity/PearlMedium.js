@@ -56,9 +56,8 @@ pearlcatch.entity.PearlMedium.prototype.init = function() {
 
 pearlcatch.entity.PearlMedium.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
-
     this.x -= 1.5;
-
+    this.rotation += 1;
 };
 
 /**
