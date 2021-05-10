@@ -22,7 +22,7 @@ pearlcatch.entity.Fish = function(player) {
     /**
      * ...
      */
-    rune.display.Sprite.call(this, 650, 650, 100, 48, "", "purplefish");
+    rune.display.Sprite.call(this, 650, 650, 100, 48, "", "purplefish_sprite_6");
 };
 
 //------------------------------------------------------------------------------
@@ -43,6 +43,7 @@ pearlcatch.entity.Fish.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
 
 
+    this.animations.add("swim", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], 15, true);
 
 
     //  this.m_obj = new rune.display.Sprite(650, 650, 64, 30, "#ffffff");
@@ -66,13 +67,13 @@ pearlcatch.entity.Fish.prototype.update = function(step) {
 
         this.x += 2;
         this.flippedY = false;
-        this.animations.gotoAndPlay("idle");
+        this.animations.gotoAndPlay("swim");
     }
     if (this.keyboard.pressed("LEFT")) {
 
         this.x -= 2;
         this.flippedX = false;
-        this.animations.gotoAndPlay("idle");
+        this.animations.gotoAndPlay("swim");
     }
     if (this.keyboard.pressed("DOWN")) {
         if (this.y != 687.5) {

@@ -22,7 +22,7 @@ pearlcatch.entity.Pearl = function(player) {
     /**
      * ...
      */
-    rune.display.Sprite.call(this, 0, 0, 50, 49, "", "pearl_small");
+    rune.display.Sprite.call(this, 0, 0, 60, 60, "", "glow_2");
 };
 
 //------------------------------------------------------------------------------
@@ -43,6 +43,9 @@ pearlcatch.entity.Pearl.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
     this.hitbox.set(0, 0, 50, 49);
 
+    this.animations.add("glow", [0, 1, 2, 3], 2, true);
+
+
 };
 
 
@@ -56,6 +59,7 @@ pearlcatch.entity.Pearl.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
 
     this.x -= 1.5;
+    this.animations.gotoAndPlay("glow");
     this.rotation += 1;
 
 };
