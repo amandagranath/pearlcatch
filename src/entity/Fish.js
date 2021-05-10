@@ -22,7 +22,7 @@ pearlcatch.entity.Fish = function(player) {
     /**
      * ...
      */
-    rune.display.Sprite.call(this, 650, 650, 100, 48, "", "purplefish_sprite_6");
+    rune.display.Sprite.call(this, 650, 360, 100, 48, "", "purplefish_sprite_6");
 };
 
 //------------------------------------------------------------------------------

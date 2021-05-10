@@ -23,7 +23,7 @@ pearlcatch.entity.PearlMedium = function(player) {
     /**
      * ...
      */
-    rune.display.Sprite.call(this, 0, 0, 75, 74, "", "pearl_medium");
+    rune.display.Sprite.call(this, 0, 0, 83, 82, "", "pearl_medium");
 };
 
 //------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ pearlcatch.entity.PearlMedium.prototype.constructor = pearlcatch.entity.PearlMed
  */
 pearlcatch.entity.PearlMedium.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
-    this.hitbox.set(0, 0, 75, 74);
+    this.hitbox.set(0, 0, 83, 82);
 
 
 };

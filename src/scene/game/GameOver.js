@@ -1,6 +1,9 @@
  //------------------------------------------------------------------------------
  // Constructor scope
  //------------------------------------------------------------------------------
+
+ //const { TouchBarSlider } = require("electron");
+
  /**
   * Creates a new object.
   *
@@ -54,9 +57,9 @@
      );
      this.m_gameOver.center = this.application.screen.center;
      this.addChild(this.m_gameOver);
-     console.log(this.totalScore);
+     // console.log(this.totalScore);
      this.highScoreList.push(this.totalScore);
-     console.log(this.highScoreList);
+     //console.log(this.highScoreList);
 
  };
 

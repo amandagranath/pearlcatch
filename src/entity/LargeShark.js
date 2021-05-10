@@ -13,8 +13,8 @@
  * 
  * Game state.
  */
-pearlcatch.entity.LargeShark = function(player) {
-
+pearlcatch.entity.LargeShark = function(totalScore, player) {
+    this.totalScore = totalScore;
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -41,8 +41,8 @@ pearlcatch.entity.LargeShark.prototype.constructor = pearlcatch.entity.LargeShar
  */
 pearlcatch.entity.LargeShark.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
-    this.hitbox.set(15, 50, 190, 70);
-
+    this.hitbox.set(15, 50, 300, 130);
+    console.log(this.totalScore);
 
 };
 
@@ -57,8 +57,15 @@ pearlcatch.entity.LargeShark.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
 
     this.x -= 1.5;
-
-
+    if (this.totalScore >= 1000) {
+        this.x -= 3.5;
+    }
+    if (this.totalScore >= 2000) {
+        this.x -= 4.5;
+    }
+    if (this.totalScore >= 3000) {
+        this.x -= 5.5;
+    }
     if (this.keyboard.justPressed("space")) {
         this.application.scenes.load([new pearlcatch.scene.Game()]);
     }

@@ -79,7 +79,7 @@ pearlcatch.scene.Game.prototype.m_initCamera = function() {
     this.m_camera = this.cameras.add(this.cameras.create());
     this.cameras.getCamera(0).fade.opacity = 1.0;
     this.cameras.getCamera(0).fade.in(1500);
-    this.cameras.getCamera(0).debug = false;
+    this.cameras.getCamera(0).debug = true;
 };
 
 
@@ -260,16 +260,16 @@ pearlcatch.scene.Game.prototype.createSharks = function(shark_size) {
 
 pearlcatch.scene.Game.prototype.getSharkSize = function(shark_size) {
     if (shark_size == "small") {
-        return this.shark = new pearlcatch.entity.SmallShark();
+        return this.shark = new pearlcatch.entity.SmallShark(this.totalScore);
 
     }
 
     if (shark_size == "medium") {
-        return this.shark = new pearlcatch.entity.MediumShark();
+        return this.shark = new pearlcatch.entity.MediumShark(this.totalScore);
     }
 
     if (shark_size == "big") {
-        return this.shark = new pearlcatch.entity.LargeShark();
+        return this.shark = new pearlcatch.entity.LargeShark(this.totalScore);
     }
 };
 

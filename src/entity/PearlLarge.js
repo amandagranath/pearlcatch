@@ -25,7 +25,7 @@ pearlcatch.entity.PearlLarge = function(player) {
     /**
      * ...
      */
-    rune.display.Sprite.call(this, 0, 0, 120, 120, "", "glow_7");
+    rune.display.Sprite.call(this, 0, 0, 110, 106, "", "pearl_large");
 };
 
 //------------------------------------------------------------------------------
@@ -44,9 +44,9 @@ pearlcatch.entity.PearlLarge.prototype.constructor = pearlcatch.entity.PearlLarg
  */
 pearlcatch.entity.PearlLarge.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
-    this.hitbox.set(0, 0, 102, 100);
+    this.hitbox.set(0, 0, 110, 106);
 
-    this.animations.add("glow", [0, 1, 2, 3], 4, true);
+    // this.animations.add("glow", [0, 1, 2, 3], 4, true);
 
 
 };

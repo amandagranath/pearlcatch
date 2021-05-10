@@ -13,8 +13,8 @@
  * 
  * Game state.
  */
-pearlcatch.entity.SmallShark = function(player) {
-
+pearlcatch.entity.SmallShark = function(totalScore) {
+    this.totalScore = totalScore;
 
     //--------------------------------------------------------------------------
     // Super call
@@ -57,8 +57,15 @@ pearlcatch.entity.SmallShark.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
 
     this.x -= 1.5;
-
-
+    if (this.totalScore >= 1000) {
+        this.x -= 3.5;
+    }
+    if (this.totalScore >= 2000) {
+        this.x -= 4.5;
+    }
+    if (this.totalScore >= 3000) {
+        this.x -= 5.5;
+    }
     if (this.keyboard.justPressed("space")) {
         this.application.scenes.load([new pearlcatch.scene.Game()]);
     }
