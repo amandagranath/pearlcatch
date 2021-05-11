@@ -48,6 +48,7 @@ pearlcatch.scene.Menu.prototype.init = function () {
     this.m_deactivateBtn();
     rune.scene.Scene.prototype.init.call(this);
     this.cameras.getCamera(0).fillColor = "#90e0ef";
+    //this.application.highscores.clear();
 };
 
 
