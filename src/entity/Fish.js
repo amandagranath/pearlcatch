@@ -64,13 +64,13 @@ pearlcatch.entity.Fish.prototype.update = function(step) {
     //this.m_player2.y = Math.floor(Math.random() * 200) + 1;
 
     if (this.keyboard.pressed("RIGHT")) {
-
+        this.rotation = 0;
         this.x += 2;
         this.flippedY = false;
         this.animations.gotoAndPlay("swim");
     }
     if (this.keyboard.pressed("LEFT")) {
-
+        this.rotation = 0;
         this.x -= 2;
         this.flippedX = false;
         this.animations.gotoAndPlay("swim");
@@ -79,7 +79,9 @@ pearlcatch.entity.Fish.prototype.update = function(step) {
         if (this.y != 687.5) {
             this.y += 2;
             this.flippedY = false;
+            this.rotation = 35;
             this.animations.gotoAndPlay("idle");
+
 
         } else {
             this.y = 687.5;
@@ -88,6 +90,7 @@ pearlcatch.entity.Fish.prototype.update = function(step) {
 
 
     } else if (this.keyboard.pressed("UP")) {
+        this.rotation = -35;
         if (this.y != 0.5) {
             this.y -= 2;
 

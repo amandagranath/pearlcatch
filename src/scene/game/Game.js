@@ -27,6 +27,9 @@ pearlcatch.scene.Game = function() {
     this.stars = [];
     this.power = null;
     this.entity_sizes = ["small", "medium", "big"];
+    this.finalScore = 0;
+    //this.themeSong = null;
+    // this.backgroundSong = null;
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -57,6 +60,7 @@ pearlcatch.scene.Game.prototype.init = function() {
 
     this.m_initBackground();
     this.m_initBubbles();
+    this.m_initSeagrass();
     this.m_initHud();
     this.m_initWav();
 
@@ -96,6 +100,11 @@ pearlcatch.scene.Game.prototype.m_initBackground = function() {
         "background"
     );
     this.stage.addChild(this.m_background);
+};
+
+pearlcatch.scene.Game.prototype.m_initSeagrass = function() {
+    this.m_seagrass = new pearlcatch.entity.SeaGrass();
+    this.stage.addChild(this.m_seagrass);
 };
 pearlcatch.scene.Game.prototype.m_initBubbles = function() {
     this.m_smallBubble = new rune.display.Graphic(
@@ -144,12 +153,11 @@ pearlcatch.scene.Game.prototype.m_initHud = function() {
 
 
 pearlcatch.scene.Game.prototype.m_initWav = function() {
-    /**this.application.sounds.music.volume = 0.5;
-      var music = this.application.sounds.music.get("themesong")
-      var music2 = this.application.sounds.music.get("backgroundwater")
-      music.play();
-      music.resume();
-      music2.play(); */
+    this.application.sounds.music.volume = 0.5;
+    this.themeSong = this.application.sounds.music.get("themesong")
+    this.backgroundSong = this.application.sounds.music.get("backgroundwater")
+    this.themeSong.play();
+    this.backgroundSong.play();
 };
 pearlcatch.scene.Game.prototype.m_initPearlSound = function() {
     this.application.sounds.music.volume = 0.2;
@@ -158,6 +166,8 @@ pearlcatch.scene.Game.prototype.m_initPearlSound = function() {
 };
 pearlcatch.scene.Game.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
+    this.themeSong.play(false);
+    this.backgroundSong.play(false);
     this.m_initBubbleMoving();
     this.sharkInterval -= step;
     if (this.keyboard.justPressed("ENTER")) {
@@ -171,11 +181,27 @@ pearlcatch.scene.Game.prototype.update = function(step) {
     for (var i = 0; i < this.sharks.length; i++) {
         if (this.power == null) {
             if (this.player.hitTestObject(this.sharks[i])) {
-                this.gameOver = new pearlcatch.scene.GameOver(this.totalScore);
+                for (var i = 0; i < this.sharks.length; i++) {
+                    this.sharks[i].active = false;
+                }
+                for (var i = 0; i < this.score.length; i++) {
+                    this.score[i].active = false;
+                }
+                for (var i = 0; i < this.squids.length; i++) {
+                    this.squids[i].active = false;
+                }
+                for (var i = 0; i < this.stars.length; i++) {
+                    this.stars[i].active = false;
+                }
+                this.player.active = false;
+                this.gameOver = new pearlcatch.entity.GameOver();
+                this.gameOver.center = this.application.screen.center;
                 this.stage.addChild(this.gameOver);
-
+                //  this.application.Highscores.test(this.finalScore);
             }
+
         }
+
     }
 
     this.pearlInterval -= step;
@@ -192,6 +218,7 @@ pearlcatch.scene.Game.prototype.update = function(step) {
             this.totalScore = this.totalScore + this.score[i].pearlScore;
             this.hud.score.text = this.totalScore.toString();
             this.score.splice(i, 1);
+            this.finalScore = parseInt(this.totalScore);
             var displayPoints = new pearlcatch.entity.Points(this, pearlPoints);
             displayPoints.x = this.player.x + 100;
             displayPoints.y = this.player.y - 30;
@@ -235,6 +262,7 @@ pearlcatch.scene.Game.prototype.update = function(step) {
     if (this.power !== null) {
         this.power.center = this.player.center;
     }
+
 
 };
 
