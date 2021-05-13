@@ -23,7 +23,9 @@ pearlcatch.entity.MediumShark = function(totalScore) {
     /**
      * ...
      */
-    rune.display.Sprite.call(this, 0, 0, 290, 163, "", "medium_shark");
+    //rune.display.Sprite.call(this, 0, 0, 290, 163, "", "medium_shark");
+    rune.display.Sprite.call(this, 0, 0, 352, 233, "", "big_shark_sprite_8");
+    
 };
 
 //------------------------------------------------------------------------------
@@ -43,6 +45,9 @@ pearlcatch.entity.MediumShark.prototype.constructor = pearlcatch.entity.MediumSh
 pearlcatch.entity.MediumShark.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
     this.hitbox.set(15, 50, 250, 100);
+    this.animations.add("swim", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 10, true);
+    this.scaleX = 0.7;
+    this.scaleY = 0.7;
 
 
 };

@@ -22,7 +22,7 @@ pearlcatch.entity.LargeShark = function(totalScore, player) {
     /**
      * ...
      */
-    rune.display.Sprite.call(this, 0, 0, 330, 185, "", "large_shark");
+    rune.display.Sprite.call(this, 0, 0, 352, 233, "", "big_shark_sprite_8");
 };
 
 //------------------------------------------------------------------------------
@@ -43,6 +43,8 @@ pearlcatch.entity.LargeShark.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
     this.hitbox.set(15, 50, 300, 130);
     console.log(this.totalScore);
+
+    this.animations.add("swim", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 10, true);
 
 };
 

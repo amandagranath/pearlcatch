@@ -46,7 +46,7 @@ pearlcatch.entity.Squid.prototype.constructor = pearlcatch.entity.Squid;
 pearlcatch.entity.Squid.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
     this.hitbox.set(0, 0, 100, 174);
-    this.animations.add("swim", [0, 1, 2, 3, 4], 3, true);
+    this.animations.add("swim", [0, 1, 2, 3, 4], 6, true);
 
 
     //  this.m_obj = new rune.display.Sprite(650, 650, 64, 30, "#ffffff");
@@ -67,7 +67,7 @@ pearlcatch.entity.Squid.prototype.update = function(step) {
     //this.m_player2.y = Math.floor(Math.random() * 200) + 1;
 
     this.x -= 1.5;
-
+    this.rotation = -45;
 
 };
 
