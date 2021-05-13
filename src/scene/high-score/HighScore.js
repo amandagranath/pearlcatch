@@ -37,48 +37,90 @@ pearlcatch.scene.HighScore.prototype.constructor = pearlcatch.scene.HighScore;
 //------------------------------------------------------------------------------
 
 pearlcatch.scene.HighScore.prototype.init = function() {
+    this.m_initBackground();
+    this.m_initMenuButton();
     rune.scene.Scene.prototype.init.call(this);
-    this.cameras.getCamera(0).fillColor = "#90e0ef";
+
+    
     this.one = "1." + " " + this.application.highscores.get(0,0).name.toString() + " " + this.application.highscores.get(0,0).score.toString();
     this.two = "2." + " " + this.application.highscores.get(1,0).name.toString() + " " + this.application.highscores.get(1,0).score.toString();
     this.three = "3." + " " + this.application.highscores.get(2,0).name.toString() + " " + this.application.highscores.get(2,0).score.toString();
     this.four = "4." + " " + this.application.highscores.get(3,0).name.toString() + " " + this.application.highscores.get(3,0).score.toString();
     this.five = "5." + " " + this.application.highscores.get(4,0).name.toString() + " " + this.application.highscores.get(4,0).score.toString();
 
-    this.text = new rune.text.BitmapField("High Score");
     this.one = new rune.text.BitmapField(this.one);
     this.two = new rune.text.BitmapField(this.two);
     this.three = new rune.text.BitmapField(this.three);
     this.four = new rune.text.BitmapField(this.four);
     this.five = new rune.text.BitmapField(this.five);
+
+    this.one.scaleY = 3;
+    this.one.scaleX = 3;
+    this.one.y = 180;
+    this.one.x = 470;
+
+  
+    this.two.scaleY = 3;
+    this.two.scaleX = 3;
+    this.two.y = 260;
+    this.two.x = 470;
+
     
-    this.text.autoSize = true;
-    this.text.center = this.application.screen.center;
+    this.three.y = 340;
+    this.three.scaleY = 3;
+    this.three.scaleX = 3;
+    this.three.x = 470;
 
-    this.one.autoSize = true;
-    this.one.center = this.application.screen.center;
-    this.one.y = 400;
+  
+    
+    this.four.y = 420;
+    this.four.scaleY = 3;
+    this.four.scaleX = 3;
+    this.four.x = 470;
 
-    this.two.autoSize = true;
-    this.two.center = this.application.screen.center;
-    this.two.y = 420;
+ 
+    this.five.y = 500;
+    this.five.scaleY = 3;
+    this.five.scaleX = 3;
+    this.five.x = 470;
 
-    this.three.autoSize = true;
-    this.three.center = this.application.screen.center;
-    this.three.y =440;
-
-    this.four.autoSize = true;
-    this.four.center = this.application.screen.center;
-    this.four.y = 460;
-
-    this.five.autoSize = true;
-    this.five.center = this.application.screen.center;
-    this.five.y = 480;
-
-    this.stage.addChild(this.text);
     this.stage.addChild(this.one);
     this.stage.addChild(this.two);
     this.stage.addChild(this.three);
     this.stage.addChild(this.four);
     this.stage.addChild(this.five);
+};
+
+pearlcatch.scene.HighScore.prototype.update = function (step) {
+    if (this.keyboard.justPressed("ENTER")) {
+        this.application.sounds.music.volume = 0.3;
+        var clickSound = this.application.sounds.music.get("buttonclick");
+        clickSound.play();
+        this.application.scenes.load([new pearlcatch.scene.Menu()]);
+    }
+};
+
+
+pearlcatch.scene.HighScore.prototype.m_initBackground = function () {
+    this.m_highBackground = new rune.display.Graphic(
+        0,
+        0,
+        1280,
+        720,
+        "",
+        "highscore-background"
+    );
+    this.stage.addChild(this.m_highBackground);
+};
+
+pearlcatch.scene.HighScore.prototype.m_initMenuButton = function () {
+    this.m_menuButton = new rune.display.Graphic(
+        40,
+        600,
+        170,
+        81,
+        "",
+        "menu_button"
+    );
+    this.stage.addChild(this.m_menuButton);
 };
