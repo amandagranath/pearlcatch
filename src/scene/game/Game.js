@@ -13,7 +13,7 @@
  * 
  * Game state.
  */
-pearlcatch.scene.Game = function () {
+pearlcatch.scene.Game = function() {
     this.hud = null;
     this.gameOver = null;
     this.sharkInterval = 0;
@@ -30,8 +30,6 @@ pearlcatch.scene.Game = function () {
     this.finalScore = 0;
     this.gameOverFlag = false;
     this.gameOverStop = false;
-    //this.themeSong = null;
-    // this.backgroundSong = null;
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -56,13 +54,14 @@ pearlcatch.scene.Game.prototype.constructor = pearlcatch.scene.Game;
 /**
  * @inheritDoc
  */
-pearlcatch.scene.Game.prototype.init = function () {
+pearlcatch.scene.Game.prototype.init = function() {
     rune.scene.Scene.prototype.init.call(this);
 
 
     this.m_initBackground();
     this.m_initBubbles();
     this.m_initSeagrass();
+    this.m_initSecondSeagrass();
     this.m_initHud();
     this.m_initWav();
 
@@ -81,7 +80,7 @@ pearlcatch.scene.Game.prototype.init = function () {
     this.cameras.getCamera(0).addChild(this.hud);
 
 };
-pearlcatch.scene.Game.prototype.m_initCamera = function () {
+pearlcatch.scene.Game.prototype.m_initCamera = function() {
     this.m_camera = this.cameras.add(this.cameras.create());
     this.cameras.getCamera(0).fade.opacity = 1.0;
     this.cameras.getCamera(0).fade.in(1500);
@@ -92,7 +91,7 @@ pearlcatch.scene.Game.prototype.m_initCamera = function () {
 /**
  * @inheritDoc
  */
-pearlcatch.scene.Game.prototype.m_initBackground = function () {
+pearlcatch.scene.Game.prototype.m_initBackground = function() {
     this.m_background = new rune.display.Graphic(
         0,
         0,
@@ -104,11 +103,15 @@ pearlcatch.scene.Game.prototype.m_initBackground = function () {
     this.stage.addChild(this.m_background);
 };
 
-pearlcatch.scene.Game.prototype.m_initSeagrass = function () {
+pearlcatch.scene.Game.prototype.m_initSeagrass = function() {
     this.m_seagrass = new pearlcatch.entity.SeaGrass();
     this.stage.addChild(this.m_seagrass);
 };
-pearlcatch.scene.Game.prototype.m_initBubbles = function () {
+pearlcatch.scene.Game.prototype.m_initSecondSeagrass = function() {
+    this.m_SecondSeagrass = new pearlcatch.entity.SecondSeaGrass();
+    this.stage.addChild(this.m_SecondSeagrass);
+};
+pearlcatch.scene.Game.prototype.m_initBubbles = function() {
     this.m_smallBubble = new rune.display.Graphic(
         100,
         100,
@@ -149,142 +152,167 @@ pearlcatch.scene.Game.prototype.m_initBubbles = function () {
 
 
 
-pearlcatch.scene.Game.prototype.m_initHud = function () {
+pearlcatch.scene.Game.prototype.m_initHud = function() {
 
 };
 
 
-pearlcatch.scene.Game.prototype.m_initWav = function () {
+pearlcatch.scene.Game.prototype.m_initWav = function() {
     this.application.sounds.music.volume = 0.5;
     this.themeSong = this.application.sounds.music.get("themesong")
     this.backgroundSong = this.application.sounds.music.get("backgroundwater")
     this.themeSong.play();
     this.backgroundSong.play();
 };
-pearlcatch.scene.Game.prototype.m_initPearlSound = function () {
+pearlcatch.scene.Game.prototype.m_initPearlSound = function() {
     this.application.sounds.music.volume = 0.2;
-    var music = this.application.sounds.music.get("catch_pearl")
-    music.play();
+    this.pearlSound = this.application.sounds.music.get("catch_pearl")
+    this.pearlSound.play();
 };
-pearlcatch.scene.Game.prototype.update = function (step) {
+pearlcatch.scene.Game.prototype.m_initSharkSound = function() {
+    this.application.sounds.music.volume = 0.5;
+    this.sharkSound = this.application.sounds.music.get("sharksound2")
+    this.sharkSound.play();
+};
+pearlcatch.scene.Game.prototype.m_initSquidSound = function() {
+    this.application.sounds.music.volume = 0.2;
+    this.splatterSound = this.application.sounds.music.get("splatsound")
+    this.splatterSound.play();
+};
+pearlcatch.scene.Game.prototype.m_initStarSound = function() {
+    this.application.sounds.music.volume = 0.1;
+    this.powerUpSound = this.application.sounds.music.get("powerupsound")
+    this.powerUpSound.play();
+};
+pearlcatch.scene.Game.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
     this.themeSong.play(false);
     this.backgroundSong.play(false);
     this.m_initBubbleMoving();
-    if (this.gameOverStop == false){
-    this.sharkInterval -= step;
-    if (this.keyboard.justPressed("ENTER")) {
-        this.sharkInterval = -1;
+    if (this.keyboard.justPressed("P")) {
+        this.themeSong.stop();
+        this.backgroundSong.stop();
+        this.sharkSound.stop();
+        this.pearlSound.stop();
+        this.splatterSound.stop();
     }
-    if (this.sharkInterval < 0) {
-        this.sharkInterval = 5000;
-        this.shark_size = this.entity_sizes[Math.floor(Math.random() * this.entity_sizes.length)];
-        this.createSharks(this.shark_size);
-    }
-    for (var i = 0; i < this.sharks.length; i++) {
-        if (this.power == null) {
-            if (this.player.hitTestObject(this.sharks[i])) {
-                for (var i = 0; i < this.sharks.length; i++) {
-                    this.sharks[i].active = false;
+    if (this.gameOverStop == false) {
+        this.sharkInterval -= step;
+        if (this.keyboard.justPressed("ENTER")) {
+            this.sharkInterval = -1;
+        }
+        if (this.sharkInterval < 0) {
+            this.sharkInterval = 5000;
+            this.shark_size = this.entity_sizes[Math.floor(Math.random() * this.entity_sizes.length)];
+            this.createSharks(this.shark_size);
+        }
+        for (var i = 0; i < this.sharks.length; i++) {
+            if (this.power == null) {
+                if (this.player.hitTestObject(this.sharks[i])) {
+                    this.m_initSharkSound();
+                    for (var i = 0; i < this.sharks.length; i++) {
+                        this.sharks[i].active = false;
+                    }
+                    for (var i = 0; i < this.score.length; i++) {
+                        this.score[i].active = false;
+                    }
+                    for (var i = 0; i < this.squids.length; i++) {
+                        this.squids[i].active = false;
+                    }
+                    for (var i = 0; i < this.stars.length; i++) {
+                        this.stars[i].active = false;
+                    }
+                    this.player.active = false;
+                    this.gameOver = new pearlcatch.entity.GameOver();
+                    this.gameOver.center = this.application.screen.center;
+                    this.stage.addChild(this.gameOver);
+                    this.sharks.splice(i, 1);
+                    this.stage.removeChild(this.sharks[i]);
+                    if (this.gameOverFlag == false) {
+                        this.gameOverStop = true;
+                        this.gameOverFlag = true;
+                        this.checkHighScore();
+                    }
+                    //  this.application.Highscores.test(this.finalScore);
                 }
-                for (var i = 0; i < this.score.length; i++) {
-                    this.score[i].active = false;
-                }
-                for (var i = 0; i < this.squids.length; i++) {
-                    this.squids[i].active = false;
-                }
-                for (var i = 0; i < this.stars.length; i++) {
-                    this.stars[i].active = false;
-                }
-                this.player.active = false;
-                this.gameOver = new pearlcatch.entity.GameOver();
-                this.gameOver.center = this.application.screen.center;
-                this.stage.addChild(this.gameOver);
-                this.sharks.splice(i, 1);
-                this.stage.removeChild(this.sharks[i]);
-                if (this.gameOverFlag == false){
-                    this.gameOverStop = true;
-                    this.gameOverFlag = true;
-                    this.checkHighScore();
-                }
-                //  this.application.Highscores.test(this.finalScore);
+
             }
 
         }
 
-    }
-
-    this.pearlInterval -= step;
-    if (this.pearlInterval < 0) {
-        this.pearlInterval = 5000;
-        this.pearl_size = this.entity_sizes[Math.floor(Math.random() * this.entity_sizes.length)];
-        this.createPearl(this.pearl_size);
-    }
-    for (var i = 0; i < this.score.length; i++) {
-        if (this.player.hitTestObject(this.score[i])) {
-            this.m_initPearlSound();
-            var pearlPoints = this.score[i].pearlScore;
-            this.stage.removeChild(this.score[i]);
-            this.totalScore = this.totalScore + this.score[i].pearlScore;
-            this.hud.score.text = this.totalScore.toString();
-            this.score.splice(i, 1);
-            this.finalScore = parseInt(this.totalScore);
-            var displayPoints = new pearlcatch.entity.Points(this, pearlPoints);
-            displayPoints.x = this.player.x + 100;
-            displayPoints.y = this.player.y - 30;
-            this.stage.addChild(displayPoints);
+        this.pearlInterval -= step;
+        if (this.pearlInterval < 0) {
+            this.pearlInterval = 5000;
+            this.pearl_size = this.entity_sizes[Math.floor(Math.random() * this.entity_sizes.length)];
+            this.createPearl(this.pearl_size);
         }
-    }
-
-    this.squidInterval -= step;
-    if (this.squidInterval < 0) {
-        this.squidInterval = 6000;
-        this.createSquid();
-    }
-    for (var i = 0; i < this.squids.length; i++) {
-        if (this.power == null) {
-            if (this.player.hitTestObject(this.squids[i])) {
-                var splat = new pearlcatch.entity.Splatter();
-                splat.y = rune.util.Math.random(0, 570);
-                splat.x = rune.util.Math.random(0, 1000);
-                this.squids.splice(i, 1);
-                this.stage.addChild(splat);
+        for (var i = 0; i < this.score.length; i++) {
+            if (this.player.hitTestObject(this.score[i])) {
+                this.m_initPearlSound();
+                var pearlPoints = this.score[i].pearlScore;
+                this.stage.removeChild(this.score[i]);
+                this.totalScore = this.totalScore + this.score[i].pearlScore;
+                this.hud.score.text = this.totalScore.toString();
+                this.score.splice(i, 1);
+                this.finalScore = parseInt(this.totalScore);
+                var displayPoints = new pearlcatch.entity.Points(this, pearlPoints);
+                displayPoints.x = this.player.x + 100;
+                displayPoints.y = this.player.y - 30;
+                this.stage.addChild(displayPoints);
             }
         }
-    }
 
-    this.starfishInterval -= step;
-    if (this.starfishInterval < 0) {
-        this.starfishInterval = 30000;
-        this.createStarfish();
-    }
-
-    for (var i = 0; i < this.stars.length; i++) {
-        if (this.player.hitTestObject(this.stars[i])) {
-            this.power = new pearlcatch.entity.Power(this);
-            this.stage.removeChild(this.stars[i], true);
-            this.stars.splice(i, 1);
-            this.stage.addChildAt(this.power, 1);
+        this.squidInterval -= step;
+        if (this.squidInterval < 0) {
+            this.squidInterval = 6000;
+            this.createSquid();
+        }
+        for (var i = 0; i < this.squids.length; i++) {
+            if (this.power == null) {
+                if (this.player.hitTestObject(this.squids[i])) {
+                    this.m_initSquidSound();
+                    var splat = new pearlcatch.entity.Splatter();
+                    splat.y = rune.util.Math.random(0, 570);
+                    splat.x = rune.util.Math.random(0, 1000);
+                    this.squids.splice(i, 1);
+                    this.stage.addChild(splat);
+                }
+            }
         }
 
-    }
+        this.starfishInterval -= step;
+        if (this.starfishInterval < 0) {
+            this.starfishInterval = 30000;
+            this.createStarfish();
+        }
 
-    if (this.power !== null) {
-        this.power.center = this.player.center;
+        for (var i = 0; i < this.stars.length; i++) {
+            if (this.player.hitTestObject(this.stars[i])) {
+                this.m_initStarSound();
+                this.power = new pearlcatch.entity.Power(this);
+                this.stage.removeChild(this.stars[i], true);
+                this.stars.splice(i, 1);
+                this.stage.addChildAt(this.power, 1);
+            }
+
+        }
+
+        if (this.power !== null) {
+            this.power.center = this.player.center;
+        }
     }
-}
 
 };
 
 /**
  * @inheritDoc
  */
-pearlcatch.scene.Game.prototype.dispose = function () {
+pearlcatch.scene.Game.prototype.dispose = function() {
     rune.scene.Scene.prototype.dispose.call(this);
 };
 
 
-pearlcatch.scene.Game.prototype.createSharks = function (shark_size) {
+pearlcatch.scene.Game.prototype.createSharks = function(shark_size) {
     this.getSharkSize(shark_size);
     var shark = this.shark;
     shark.y = rune.util.Math.random(0, 570);
@@ -296,7 +324,7 @@ pearlcatch.scene.Game.prototype.createSharks = function (shark_size) {
 };
 
 
-pearlcatch.scene.Game.prototype.getSharkSize = function (shark_size) {
+pearlcatch.scene.Game.prototype.getSharkSize = function(shark_size) {
     if (shark_size == "small") {
         return this.shark = new pearlcatch.entity.SmallShark(this.totalScore);
 
@@ -311,7 +339,7 @@ pearlcatch.scene.Game.prototype.getSharkSize = function (shark_size) {
     }
 };
 
-pearlcatch.scene.Game.prototype.createPearl = function (pearl_size) {
+pearlcatch.scene.Game.prototype.createPearl = function(pearl_size) {
     this.getPearlSize(pearl_size);
     var pearl = this.pearl;
     pearl.y = rune.util.Math.random(0, 570);
@@ -320,7 +348,7 @@ pearlcatch.scene.Game.prototype.createPearl = function (pearl_size) {
     this.stage.addChild(pearl);
 };
 
-pearlcatch.scene.Game.prototype.getPearlSize = function (pearl_size) {
+pearlcatch.scene.Game.prototype.getPearlSize = function(pearl_size) {
     if (pearl_size == "small") {
         return this.pearl = new pearlcatch.entity.Pearl();
 
@@ -336,7 +364,7 @@ pearlcatch.scene.Game.prototype.getPearlSize = function (pearl_size) {
 };
 
 
-pearlcatch.scene.Game.prototype.createSquid = function () {
+pearlcatch.scene.Game.prototype.createSquid = function() {
 
     var squid = new pearlcatch.entity.Squid();
     squid.y = rune.util.Math.random(0, 570);
@@ -345,14 +373,14 @@ pearlcatch.scene.Game.prototype.createSquid = function () {
     this.stage.addChild(squid);
 };
 
-pearlcatch.scene.Game.prototype.createStarfish = function () {
+pearlcatch.scene.Game.prototype.createStarfish = function() {
     var starfish = new pearlcatch.entity.Starfish(this);
     starfish.y = rune.util.Math.random(0, 570);
     starfish.x = 1280;
     this.stars.push(starfish);
     this.stage.addChild(starfish);
 }
-pearlcatch.scene.Game.prototype.m_initBubbleMoving = function () {
+pearlcatch.scene.Game.prototype.m_initBubbleMoving = function() {
     this.m_smallBubble.y -= 0.1;
     this.m_miniBubble.y -= 0.1;
     this.m_smallBubble2.y -= 0.1;
@@ -373,7 +401,7 @@ pearlcatch.scene.Game.prototype.m_initBubbleMoving = function () {
 
 };
 
-pearlcatch.scene.Game.prototype.checkHighScore = function () {
+pearlcatch.scene.Game.prototype.checkHighScore = function() {
     if (this.application.highscores.test(this.finalScore, 0) == -1) {
         console.log("ej highscore");
         //Lägga in starta om knapp och gå till meny-knapp
@@ -382,10 +410,7 @@ pearlcatch.scene.Game.prototype.checkHighScore = function () {
     }
 }
 
-pearlcatch.scene.Game.prototype.sendHighscore = function () {
+pearlcatch.scene.Game.prototype.sendHighscore = function() {
     this.themeSong.stop();
     this.application.scenes.load([new pearlcatch.scene.NewHighscore(this.finalScore)]);
-}
-
-
-
+};

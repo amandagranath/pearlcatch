@@ -22,7 +22,7 @@ pearlcatch.entity.SeaGrass = function(player) {
     /**
      * ...
      */
-    rune.display.Sprite.call(this, 400, 500, 299, 379, "", "seagrass");
+    rune.display.Sprite.call(this, 400, 600, 200, 200, "", "seagrass");
 };
 
 //------------------------------------------------------------------------------
@@ -44,7 +44,7 @@ pearlcatch.entity.SeaGrass.prototype.init = function() {
 
     this.scaleX = 0.5;
     this.scaleY = 0.5;
-    this.animations.add("swim", [0, 1, 2, 3], 3, true);
+    this.animations.add("swim", [0, 1, 2, 3, 4], 6, true);
 
 
     //  this.m_obj = new rune.display.Sprite(650, 650, 64, 30, "#ffffff");

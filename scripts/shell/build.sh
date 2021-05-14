@@ -17,7 +17,11 @@ npx google-closure-compiler \
 -js "./../../src/entity/PearlMedium.js" \
 -js "./../../src/entity/PearlLarge.js" \
 -js "./../../src/entity/Splatter.js" \
+-js "./../../src/entity/Points.js" \
+-js "./../../src/entity/Power.js" \
 -js "./../../src/entity/Squid.js" \
+-js "./../../src/entity/Starfish.js" \
+-js "./../../src/entity/Seagrass.js" \
 --js "./../../src/scene/instructions/Instructions.js" \
 --js "./../../src/scene/game/HUD.js" \
 --js "./../../src/scene/game/GameOver.js" \

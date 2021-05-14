@@ -13,7 +13,7 @@
  * 
  * Game state.
  */
-pearlcatch.entity.Starfish = function (gameScope) {
+pearlcatch.entity.Starfish = function(gameScope) {
     this.gameScope = gameScope;
 
 
@@ -24,7 +24,7 @@ pearlcatch.entity.Starfish = function (gameScope) {
     /**
      * ...
      */
-    rune.display.Sprite.call(this, 0, 0, 50, 48, "", "sjostjarna");
+    rune.display.Sprite.call(this, 0, 0, 50, 48, "", "sjostjarna2");
 };
 
 //------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ pearlcatch.entity.Starfish.prototype.constructor = pearlcatch.entity.Starfish;
  */
 
 
-pearlcatch.entity.Starfish.prototype.init = function () {
+pearlcatch.entity.Starfish.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
     this.hitbox.set(0, 0, 50, 48);
     this.tweens = new rune.tween.Tweens();
@@ -51,12 +51,12 @@ pearlcatch.entity.Starfish.prototype.init = function () {
     this.timers.create({
         duration: 500,
         scope: this,
-        onComplete: function () {
+        onComplete: function() {
             this.tweens.add(this, {
                 duration: 5000,
                 alpha: 0,
                 scope: this,
-                oncomplete: function (obj) {
+                oncomplete: function(obj) {
                     obj.parent.removeChild(obj);
                     this.gameScope.totalScore = this.gameScope.totalScore += -1000;
                     this.gameScope.hud.score.text = this.gameScope.totalScore.toString();
@@ -76,7 +76,7 @@ pearlcatch.entity.Starfish.prototype.init = function () {
  */
 
 
-pearlcatch.entity.Starfish.prototype.update = function (step) {
+pearlcatch.entity.Starfish.prototype.update = function(step) {
     this.x -= 1.5;
     this.timers.update(step);
     this.tweens.update(step);
@@ -85,6 +85,6 @@ pearlcatch.entity.Starfish.prototype.update = function (step) {
 /**
  * @inheritDoc
  */
-pearlcatch.entity.Starfish.prototype.dispose = function () {
+pearlcatch.entity.Starfish.prototype.dispose = function() {
     rune.display.Sprite.prototype.dispose.call(this);
 };

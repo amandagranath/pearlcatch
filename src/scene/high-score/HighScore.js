@@ -13,7 +13,7 @@
  * 
  * Menu state.
  */
- pearlcatch.scene.HighScore = function() {
+pearlcatch.scene.HighScore = function() {
 
     //--------------------------------------------------------------------------
     // Super call
@@ -39,14 +39,15 @@ pearlcatch.scene.HighScore.prototype.constructor = pearlcatch.scene.HighScore;
 pearlcatch.scene.HighScore.prototype.init = function() {
     this.m_initBackground();
     this.m_initMenuButton();
+    this.m_initHighscoreSound();
     rune.scene.Scene.prototype.init.call(this);
 
-    
-    this.one = "1." + " " + this.application.highscores.get(0,0).name.toString() + " " + this.application.highscores.get(0,0).score.toString();
-    this.two = "2." + " " + this.application.highscores.get(1,0).name.toString() + " " + this.application.highscores.get(1,0).score.toString();
-    this.three = "3." + " " + this.application.highscores.get(2,0).name.toString() + " " + this.application.highscores.get(2,0).score.toString();
-    this.four = "4." + " " + this.application.highscores.get(3,0).name.toString() + " " + this.application.highscores.get(3,0).score.toString();
-    this.five = "5." + " " + this.application.highscores.get(4,0).name.toString() + " " + this.application.highscores.get(4,0).score.toString();
+
+    this.one = "1." + " " + this.application.highscores.get(0, 0).name.toString() + " " + this.application.highscores.get(0, 0).score.toString();
+    this.two = "2." + " " + this.application.highscores.get(1, 0).name.toString() + " " + this.application.highscores.get(1, 0).score.toString();
+    this.three = "3." + " " + this.application.highscores.get(2, 0).name.toString() + " " + this.application.highscores.get(2, 0).score.toString();
+    this.four = "4." + " " + this.application.highscores.get(3, 0).name.toString() + " " + this.application.highscores.get(3, 0).score.toString();
+    this.five = "5." + " " + this.application.highscores.get(4, 0).name.toString() + " " + this.application.highscores.get(4, 0).score.toString();
 
     this.one = new rune.text.BitmapField(this.one);
     this.two = new rune.text.BitmapField(this.two);
@@ -59,26 +60,26 @@ pearlcatch.scene.HighScore.prototype.init = function() {
     this.one.y = 180;
     this.one.x = 470;
 
-  
+
     this.two.scaleY = 3;
     this.two.scaleX = 3;
     this.two.y = 260;
     this.two.x = 470;
 
-    
+
     this.three.y = 340;
     this.three.scaleY = 3;
     this.three.scaleX = 3;
     this.three.x = 470;
 
-  
-    
+
+
     this.four.y = 420;
     this.four.scaleY = 3;
     this.four.scaleX = 3;
     this.four.x = 470;
 
- 
+
     this.five.y = 500;
     this.five.scaleY = 3;
     this.five.scaleX = 3;
@@ -91,7 +92,7 @@ pearlcatch.scene.HighScore.prototype.init = function() {
     this.stage.addChild(this.five);
 };
 
-pearlcatch.scene.HighScore.prototype.update = function (step) {
+pearlcatch.scene.HighScore.prototype.update = function(step) {
     if (this.keyboard.justPressed("ENTER")) {
         this.application.sounds.music.volume = 0.3;
         var clickSound = this.application.sounds.music.get("buttonclick");
@@ -101,19 +102,19 @@ pearlcatch.scene.HighScore.prototype.update = function (step) {
 };
 
 
-pearlcatch.scene.HighScore.prototype.m_initBackground = function () {
+pearlcatch.scene.HighScore.prototype.m_initBackground = function() {
     this.m_highBackground = new rune.display.Graphic(
         0,
         0,
         1280,
         720,
         "",
-        "highscore-background"
+        "highscore-background3"
     );
     this.stage.addChild(this.m_highBackground);
 };
 
-pearlcatch.scene.HighScore.prototype.m_initMenuButton = function () {
+pearlcatch.scene.HighScore.prototype.m_initMenuButton = function() {
     this.m_menuButton = new rune.display.Graphic(
         40,
         600,
@@ -123,4 +124,9 @@ pearlcatch.scene.HighScore.prototype.m_initMenuButton = function () {
         "menu_button"
     );
     this.stage.addChild(this.m_menuButton);
+};
+pearlcatch.scene.HighScore.prototype.m_initMenuButton = function() {
+    this.application.sounds.music.volume = 0.4;
+    this.highscoreSound = this.application.sounds.music.get("highscoresuccess")
+    this.highscoreSound.play();
 };
