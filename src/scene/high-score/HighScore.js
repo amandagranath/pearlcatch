@@ -125,7 +125,7 @@ pearlcatch.scene.HighScore.prototype.m_initMenuButton = function() {
     );
     this.stage.addChild(this.m_menuButton);
 };
-pearlcatch.scene.HighScore.prototype.m_initMenuButton = function() {
+pearlcatch.scene.HighScore.prototype.m_initHighscoreSound = function() {
     this.application.sounds.music.volume = 0.4;
     this.highscoreSound = this.application.sounds.music.get("highscoresuccess")
     this.highscoreSound.play();

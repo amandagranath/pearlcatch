@@ -14,7 +14,7 @@
  * Game state.
  */
 pearlcatch.scene.Game = function(background_music) {
-    this.background_music = background_music
+    this.background_music = background_music;
     this.hud = null;
     this.gameOver = null;
     this.sharkInterval = 0;
@@ -31,7 +31,7 @@ pearlcatch.scene.Game = function(background_music) {
     this.finalScore = 0;
     this.gameOverFlag = false;
     this.gameOverStop = false;
-    this.pauseGame = false;
+    this.pauseGameSound = false;
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -196,8 +196,11 @@ pearlcatch.scene.Game.prototype.update = function(step) {
     //this.backgroundSong.play(false);
     this.m_initBubbleMoving();
     if (this.keyboard.pressed("P")) {
-        this.themeSong.stop();
-        this.background_music.stop();
+        if (this.pauseGameSound == false) {
+            this.pauseGameSound = true;
+            this.themeSong.stop();
+            this.background_music.stop();
+        }
 
 
     }
@@ -326,6 +329,7 @@ pearlcatch.scene.Game.prototype.update = function(step) {
             }
             this.player.active = false;
         }
+
 
     }
 
