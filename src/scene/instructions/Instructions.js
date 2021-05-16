@@ -13,8 +13,8 @@
  * 
  * Menu state.
  */
-pearlcatch.scene.Instructions = function () {
-
+pearlcatch.scene.Instructions = function(background_music) {
+    this.background_music = background_music;
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ pearlcatch.scene.Instructions.prototype.constructor = pearlcatch.scene.Instructi
 /**
  * @inheritDoc
  */
-pearlcatch.scene.Instructions.prototype.init = function () {
+pearlcatch.scene.Instructions.prototype.init = function() {
     this.m_initMenuBackground();
     pearlcatch.scene.Menu.prototype.m_initBackgroundSound();
     this.m_initPlayButton();
@@ -51,7 +51,7 @@ pearlcatch.scene.Instructions.prototype.init = function () {
 };
 
 
-pearlcatch.scene.Instructions.prototype.m_initMenuBackground = function () {
+pearlcatch.scene.Instructions.prototype.m_initMenuBackground = function() {
     this.m_menuBackground = new rune.display.Graphic(
         0,
         0,
@@ -63,7 +63,7 @@ pearlcatch.scene.Instructions.prototype.m_initMenuBackground = function () {
     this.stage.addChild(this.m_menuBackground);
 };
 
-pearlcatch.scene.Instructions.prototype.m_initPlayButton = function () {
+pearlcatch.scene.Instructions.prototype.m_initPlayButton = function() {
     this.m_playButton = new rune.display.Graphic(
         460,
         600,
@@ -75,7 +75,7 @@ pearlcatch.scene.Instructions.prototype.m_initPlayButton = function () {
     this.stage.addChild(this.m_playButton);
 };
 
-pearlcatch.scene.Instructions.prototype.m_initMenuButton = function () {
+pearlcatch.scene.Instructions.prototype.m_initMenuButton = function() {
     this.m_menuButton = new rune.display.Graphic(
         650,
         600,
@@ -93,8 +93,8 @@ pearlcatch.scene.Instructions.prototype.m_initWav = function() {
     clickSound.play();
 };
 
-pearlcatch.scene.Instructions.prototype.m_deactivateBtn = function () {
-    if (this.m_activeButton == "play"){
+pearlcatch.scene.Instructions.prototype.m_deactivateBtn = function() {
+    if (this.m_activeButton == "play") {
         this.m_playButton.alpha = 1;
         this.m_menuButton.alpha = 0.7;
     } else {
@@ -106,7 +106,7 @@ pearlcatch.scene.Instructions.prototype.m_deactivateBtn = function () {
 /**
  * @inheritDoc
  */
-pearlcatch.scene.Instructions.prototype.update = function (step) {
+pearlcatch.scene.Instructions.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
 
     if (this.keyboard.justPressed("RIGHT")) {
@@ -123,7 +123,7 @@ pearlcatch.scene.Instructions.prototype.update = function (step) {
 
     if (this.keyboard.justPressed("ENTER") && this.m_activeButton == "play") {
         this.m_initWav();
-        this.application.scenes.load([new pearlcatch.scene.Game()]);
+        this.application.scenes.load([new pearlcatch.scene.Game(this.background_music)]);
     } else if (this.keyboard.justPressed("ENTER") && this.m_activeButton == "menu") {
         this.m_initWav();
         this.application.scenes.load([new pearlcatch.scene.Menu()]);
@@ -133,6 +133,6 @@ pearlcatch.scene.Instructions.prototype.update = function (step) {
 /**
  * @inheritDoc
  */
-pearlcatch.scene.Instructions.prototype.dispose = function () {
+pearlcatch.scene.Instructions.prototype.dispose = function() {
     rune.scene.Scene.prototype.dispose.call(this);
 };

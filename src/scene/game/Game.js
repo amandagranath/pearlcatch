@@ -13,7 +13,8 @@
  * 
  * Game state.
  */
-pearlcatch.scene.Game = function() {
+pearlcatch.scene.Game = function(background_music) {
+    this.background_music = background_music
     this.hud = null;
     this.gameOver = null;
     this.sharkInterval = 0;
@@ -30,6 +31,7 @@ pearlcatch.scene.Game = function() {
     this.finalScore = 0;
     this.gameOverFlag = false;
     this.gameOverStop = false;
+    this.pauseGame = false;
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -162,22 +164,26 @@ pearlcatch.scene.Game.prototype.m_initWav = function() {
     this.themeSong = this.application.sounds.music.get("themesong")
     this.backgroundSong = this.application.sounds.music.get("backgroundwater")
     this.themeSong.play();
-    this.backgroundSong.play();
+    // this.backgroundSong.play();
 };
 pearlcatch.scene.Game.prototype.m_initPearlSound = function() {
     this.application.sounds.music.volume = 0.2;
     this.pearlSound = this.application.sounds.music.get("catch_pearl")
     this.pearlSound.play();
+
 };
 pearlcatch.scene.Game.prototype.m_initSharkSound = function() {
     this.application.sounds.music.volume = 0.5;
     this.sharkSound = this.application.sounds.music.get("sharksound2")
     this.sharkSound.play();
+
+
 };
 pearlcatch.scene.Game.prototype.m_initSquidSound = function() {
     this.application.sounds.music.volume = 0.2;
     this.splatterSound = this.application.sounds.music.get("splatsound")
     this.splatterSound.play();
+
 };
 pearlcatch.scene.Game.prototype.m_initStarSound = function() {
     this.application.sounds.music.volume = 0.1;
@@ -186,16 +192,16 @@ pearlcatch.scene.Game.prototype.m_initStarSound = function() {
 };
 pearlcatch.scene.Game.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
-    this.themeSong.play(false);
-    this.backgroundSong.play(false);
+    //this.themeSong.play(false);
+    //this.backgroundSong.play(false);
     this.m_initBubbleMoving();
-    if (this.keyboard.justPressed("P")) {
+    if (this.keyboard.pressed("P")) {
         this.themeSong.stop();
-        this.backgroundSong.stop();
-        this.sharkSound.stop();
-        this.pearlSound.stop();
-        this.splatterSound.stop();
+        this.background_music.stop();
+
+
     }
+
     if (this.gameOverStop == false) {
         this.sharkInterval -= step;
         if (this.keyboard.justPressed("ENTER")) {
@@ -300,6 +306,27 @@ pearlcatch.scene.Game.prototype.update = function(step) {
         if (this.power !== null) {
             this.power.center = this.player.center;
         }
+
+        if (this.keyboard.pressed("S")) {
+            for (var i = 0; i < this.sharks.length; i++) {
+                this.sharks[i].active = false;
+                if (this.gameOverFlag == false) {
+                    this.gameOverStop = true;
+                    this.gameOverFlag = true;
+                }
+            }
+            for (var i = 0; i < this.score.length; i++) {
+                this.score[i].active = false;
+            }
+            for (var i = 0; i < this.squids.length; i++) {
+                this.squids[i].active = false;
+            }
+            for (var i = 0; i < this.stars.length; i++) {
+                this.stars[i].active = false;
+            }
+            this.player.active = false;
+        }
+
     }
 
 };

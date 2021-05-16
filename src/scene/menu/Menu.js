@@ -13,7 +13,7 @@
  * 
  * Menu state.
  */
-pearlcatch.scene.Menu = function () {
+pearlcatch.scene.Menu = function() {
 
     //--------------------------------------------------------------------------
     // Super call
@@ -39,7 +39,7 @@ pearlcatch.scene.Menu.prototype.constructor = pearlcatch.scene.Menu;
 /**
  * @inheritDoc
  */
-pearlcatch.scene.Menu.prototype.init = function () {
+pearlcatch.scene.Menu.prototype.init = function() {
     this.m_initMenuBackground();
     this.m_initBackgroundSound();
     this.m_initPlayButton();
@@ -52,7 +52,7 @@ pearlcatch.scene.Menu.prototype.init = function () {
 };
 
 
-pearlcatch.scene.Menu.prototype.m_initMenuBackground = function () {
+pearlcatch.scene.Menu.prototype.m_initMenuBackground = function() {
     this.m_menuBackground = new rune.display.Graphic(
         0,
         0,
@@ -64,14 +64,14 @@ pearlcatch.scene.Menu.prototype.m_initMenuBackground = function () {
     this.stage.addChild(this.m_menuBackground);
 };
 
-pearlcatch.scene.Menu.prototype.m_initBackgroundSound = function () {
+pearlcatch.scene.Menu.prototype.m_initBackgroundSound = function() {
     this.application.sounds.music.volume = 1;
-    var background_music = this.application.sounds.music.get("backgroundwater");
-    background_music.play();
-    background_music.resume();
+    this.background_music = this.application.sounds.music.get("backgroundwater");
+    this.background_music.play();
+    this.background_music.resume();
 };
 
-pearlcatch.scene.Menu.prototype.m_initPlayButton = function () {
+pearlcatch.scene.Menu.prototype.m_initPlayButton = function() {
     this.m_playButton = new rune.display.Sprite(
         560,
         300,
@@ -83,7 +83,7 @@ pearlcatch.scene.Menu.prototype.m_initPlayButton = function () {
     this.stage.addChild(this.m_playButton);
 };
 
-pearlcatch.scene.Menu.prototype.m_initBestScore = function () {
+pearlcatch.scene.Menu.prototype.m_initBestScore = function() {
     this.m_bestScoreButton = new rune.display.Sprite(
         560,
         400,
@@ -95,14 +95,14 @@ pearlcatch.scene.Menu.prototype.m_initBestScore = function () {
     this.stage.addChild(this.m_bestScoreButton);
 };
 
-pearlcatch.scene.Menu.prototype.m_initWav = function () {
+pearlcatch.scene.Menu.prototype.m_initWav = function() {
     this.application.sounds.music.volume = 0.3;
     var clickSound = this.application.sounds.music.get("buttonclick");
     clickSound.play();
 };
 
-pearlcatch.scene.Menu.prototype.m_deactivateBtn = function () {
-    if (this.m_activeBtn == "play"){
+pearlcatch.scene.Menu.prototype.m_deactivateBtn = function() {
+    if (this.m_activeBtn == "play") {
         this.m_playButton.alpha = 1;
         this.m_bestScoreButton.alpha = 0.7;
     } else {
@@ -115,7 +115,7 @@ pearlcatch.scene.Menu.prototype.m_deactivateBtn = function () {
 /**
  * @inheritDoc
  */
-pearlcatch.scene.Menu.prototype.update = function (step) {
+pearlcatch.scene.Menu.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
 
     if (this.keyboard.justPressed("DOWN")) {
@@ -133,7 +133,7 @@ pearlcatch.scene.Menu.prototype.update = function (step) {
 
     if (this.keyboard.justPressed("ENTER") && this.m_activeBtn == "play") {
         this.m_initWav();
-        this.application.scenes.load([new pearlcatch.scene.Instructions()]);
+        this.application.scenes.load([new pearlcatch.scene.Instructions(this.background_music)]);
     }
 
     if (this.keyboard.justPressed("ENTER") && this.m_activeBtn == "score") {
@@ -148,6 +148,6 @@ pearlcatch.scene.Menu.prototype.update = function (step) {
 /**
  * @inheritDoc
  */
-pearlcatch.scene.Menu.prototype.dispose = function () {
+pearlcatch.scene.Menu.prototype.dispose = function() {
     rune.scene.Scene.prototype.dispose.call(this);
 };
