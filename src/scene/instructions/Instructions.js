@@ -13,8 +13,8 @@
  * 
  * Menu state.
  */
-pearlcatch.scene.Instructions = function(background_music) {
-    this.background_music = background_music;
+pearlcatch.scene.Instructions = function(backgroundSong) {
+    this.backgroundSong = backgroundSong;
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -44,6 +44,7 @@ pearlcatch.scene.Instructions.prototype.init = function() {
     pearlcatch.scene.Menu.prototype.m_initBackgroundSound();
     this.m_initPlayButton();
     this.m_initMenuButton();
+    this.m_initMusic();
     this.m_activeButton = "play";
     this.m_deactivateBtn();
     rune.scene.Scene.prototype.init.call(this);
@@ -58,10 +59,18 @@ pearlcatch.scene.Instructions.prototype.m_initMenuBackground = function() {
         1280,
         720,
         "",
-        "how_to"
+        "how_to_3"
     );
     this.stage.addChild(this.m_menuBackground);
 };
+
+pearlcatch.scene.Instructions.prototype.m_initMusic = function() {
+    this.application.sounds.music.volume = 1;
+    this.backgroundSong = this.application.sounds.music.get("backgroundwater");
+    this.backgroundSong.play();
+    this.backgroundSong.resume();
+}
+
 
 pearlcatch.scene.Instructions.prototype.m_initPlayButton = function() {
     this.m_playButton = new rune.display.Graphic(
@@ -123,7 +132,9 @@ pearlcatch.scene.Instructions.prototype.update = function(step) {
 
     if (this.keyboard.justPressed("ENTER") && this.m_activeButton == "play") {
         this.m_initWav();
-        this.application.scenes.load([new pearlcatch.scene.Game(this.background_music)]);
+        this.backgroundSong.stop();
+        this.application.scenes.load([new pearlcatch.scene.Game()]);
+
     } else if (this.keyboard.justPressed("ENTER") && this.m_activeButton == "menu") {
         this.m_initWav();
         this.application.scenes.load([new pearlcatch.scene.Menu()]);
