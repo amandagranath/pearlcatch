@@ -13,8 +13,8 @@
  * 
  * Menu state.
  */
-pearlcatch.scene.Instructions = function(backgroundSong) {
-    this.backgroundSong = backgroundSong;
+pearlcatch.scene.Instructions = function() {
+
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ pearlcatch.scene.Instructions.prototype.constructor = pearlcatch.scene.Instructi
  */
 pearlcatch.scene.Instructions.prototype.init = function() {
     this.m_initMenuBackground();
-    pearlcatch.scene.Menu.prototype.m_initBackgroundSound();
+    //  pearlcatch.scene.Menu.prototype.m_initBackgroundSound();
     this.m_initPlayButton();
     this.m_initMenuButton();
     this.m_initMusic();
@@ -131,8 +131,8 @@ pearlcatch.scene.Instructions.prototype.update = function(step) {
     }
 
     if (this.keyboard.justPressed("ENTER") && this.m_activeButton == "play") {
-        this.m_initWav();
         this.backgroundSong.stop();
+        this.m_initWav();
         this.application.scenes.load([new pearlcatch.scene.Game()]);
 
     } else if (this.keyboard.justPressed("ENTER") && this.m_activeButton == "menu") {
