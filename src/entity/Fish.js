@@ -63,16 +63,28 @@ pearlcatch.entity.Fish.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
     //this.m_player2.y = Math.floor(Math.random() * 200) + 1;
 
+    if (this.y != 687.5) {
+        this.y += 0.5;
+        // this.y += 2;
+        //this.flippedY = false;
+        //this.rotation = 35;
+        this.animations.gotoAndPlay("idle");
+
+
+    } else {
+        this.y = 687.5;
+    }
+
     if (this.keyboard.pressed("RIGHT")) {
         this.rotation = 0;
         this.x += 2;
-        this.flippedY = false;
+        this.flippedX = false;
         this.animations.gotoAndPlay("swim");
     }
     if (this.keyboard.pressed("LEFT")) {
         this.rotation = 0;
         this.x -= 2;
-        this.flippedX = false;
+        this.flippedX = true;
         this.animations.gotoAndPlay("swim");
     }
     if (this.keyboard.pressed("DOWN")) {
@@ -90,21 +102,20 @@ pearlcatch.entity.Fish.prototype.update = function(step) {
 
 
     } else if (this.keyboard.pressed("UP")) {
-        this.rotation = -35;
+
+        console.log(this.y);
         if (this.y != 0.5) {
             this.y -= 2;
+            this.rotation = -35;
 
         } else {
-            this.y = 0.5
+            this.y = 0.5;
 
         }
 
         this.animations.gotoAndPlay("idle");
 
-    } else {
-        this.animations.gotoAndPlay("idle");
     }
-
 };
 
 /**
