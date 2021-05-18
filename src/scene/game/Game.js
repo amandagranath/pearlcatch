@@ -209,7 +209,49 @@ pearlcatch.scene.Game.prototype.m_initStarSound = function() {
 
 pearlcatch.scene.Game.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
+    this.themeSong.play(false);
+    this.backgroundSound.play(false);
     this.m_initBubbleMoving();
+    if (this.keyboard.justPressed("S")) {
+        console.log("test")
+        if (this.player.active) {
+            for (var i = 0; i < this.sharks.length; i++) {
+                this.sharks[i].active = false;
+                if (this.gameOverFlag == false) {
+                    this.gameOverStop = true;
+                    this.gameOverFlag = true;
+                }
+            }
+            for (var i = 0; i < this.score.length; i++) {
+                this.score[i].active = false;
+            }
+            for (var i = 0; i < this.squids.length; i++) {
+                this.squids[i].active = false;
+            }
+            for (var i = 0; i < this.stars.length; i++) {
+                this.stars[i].active = false;
+            }
+            this.player.active = false;
+        } else {
+            this.player.active = true;
+            for (var i = 0; i < this.sharks.length; i++) {
+                this.sharks[i].active = true;
+                if (this.gameOverFlag == true) {
+                    this.gameOverStop = false;
+                    this.gameOverFlag = false;
+                }
+            }
+            for (var i = 0; i < this.score.length; i++) {
+                this.score[i].active = true;
+            }
+            for (var i = 0; i < this.squids.length; i++) {
+                this.squids[i].active = true;
+            }
+            for (var i = 0; i < this.stars.length; i++) {
+                this.stars[i].active = true;
+            }
+        }
+    }
 
     if (this.keyboard.justPressed("P")) {
         if (this.pauseGameSound == false) {
@@ -326,26 +368,6 @@ pearlcatch.scene.Game.prototype.update = function(step) {
 
         if (this.power !== null) {
             this.power.center = this.player.center;
-        }
-
-        if (this.keyboard.pressed("S")) {
-            for (var i = 0; i < this.sharks.length; i++) {
-                this.sharks[i].active = false;
-                if (this.gameOverFlag == false) {
-                    this.gameOverStop = true;
-                    this.gameOverFlag = true;
-                }
-            }
-            for (var i = 0; i < this.score.length; i++) {
-                this.score[i].active = false;
-            }
-            for (var i = 0; i < this.squids.length; i++) {
-                this.squids[i].active = false;
-            }
-            for (var i = 0; i < this.stars.length; i++) {
-                this.stars[i].active = false;
-            }
-            this.player.active = false;
         }
 
 
