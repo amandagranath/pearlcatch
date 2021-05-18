@@ -18,7 +18,7 @@
  *
  * ...
  */
-pearlcatch.scene.HUD = function (gamescope) {
+pearlcatch.scene.HUD = function(gamescope) {
     this.score = null;
     this.gamescope = gamescope;
     //--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ pearlcatch.scene.HUD.prototype.constructor = pearlcatch.scene.HUD;
 /**
  * @inheritDoc
  */
-pearlcatch.scene.HUD.prototype.init = function () {
+pearlcatch.scene.HUD.prototype.init = function() {
     rune.display.DisplayObjectContainer.prototype.init.call(this);
     //@TODO: Write app code.
     this.m_hud = new rune.display.Graphic(
@@ -80,7 +80,7 @@ pearlcatch.scene.HUD.prototype.init = function () {
 /**
  * @inheritDoc
  */
-pearlcatch.scene.HUD.prototype.update = function (step) {
+pearlcatch.scene.HUD.prototype.update = function(step) {
     rune.display.DisplayObjectContainer.prototype.update.call(this, step);
     //@TODO: Write app code.
 
@@ -107,7 +107,7 @@ pearlcatch.scene.HUD.prototype.update = function (step) {
         );
 
         this.addChild(this.m_soundButton);
-    } 
+    }
 
     if (this.gamescope.pauseGame == true) {
         console.log("pausat");
@@ -132,21 +132,21 @@ pearlcatch.scene.HUD.prototype.update = function (step) {
             "paus_button_2"
         );
         this.addChild(this.m_pausButton);
-    } 
+    }
 };
 
 /**
  * @inheritDoc
  */
-pearlcatch.scene.HUD.prototype.dispose = function () {
+pearlcatch.scene.HUD.prototype.dispose = function() {
     rune.display.DisplayObjectContainer.prototype.dispose.call(this);
     //@TODO: Write app code.
 };
-pearlcatch.scene.HUD.prototype.m_initScore = function () {
-    this.score = new rune.text.BitmapField("0");
+pearlcatch.scene.HUD.prototype.m_initScore = function() {
+    this.score = new pearlcatch.entity.WhiteFont();
     this.score.y = 10;
     this.score.x = 630;
-    this.score.scaleY = 3;
-    this.score.scaleX = 3;
+    this.score.scaleY = 0.3;
+    this.score.scaleX = 0.3;
     this.addChild(this.score);
 };

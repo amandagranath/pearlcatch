@@ -50,40 +50,40 @@ pearlcatch.scene.HighScore.prototype.init = function() {
     this.four = "4." + " " + this.application.highscores.get(3, 0).name.toString() + " " + this.application.highscores.get(3, 0).score.toString();
     this.five = "5." + " " + this.application.highscores.get(4, 0).name.toString() + " " + this.application.highscores.get(4, 0).score.toString();
 
-    this.one = new rune.text.BitmapField(this.one);
-    this.two = new rune.text.BitmapField(this.two);
-    this.three = new rune.text.BitmapField(this.three);
-    this.four = new rune.text.BitmapField(this.four);
-    this.five = new rune.text.BitmapField(this.five);
+    this.one = new pearlcatch.entity.OrangeFont(this.one);
+    this.two = new pearlcatch.entity.OrangeFont(this.two);
+    this.three = new pearlcatch.entity.OrangeFont(this.three);
+    this.four = new pearlcatch.entity.OrangeFont(this.four);
+    this.five = new pearlcatch.entity.OrangeFont(this.five);
 
-    this.one.scaleY = 3;
-    this.one.scaleX = 3;
+    this.one.scaleY = 0.3;
+    this.one.scaleX = 0.3;
     this.one.y = 180;
     this.one.x = 470;
 
 
-    this.two.scaleY = 3;
-    this.two.scaleX = 3;
+    this.two.scaleY = 0.3;
+    this.two.scaleX = 0.3;
     this.two.y = 260;
     this.two.x = 470;
 
 
     this.three.y = 340;
-    this.three.scaleY = 3;
-    this.three.scaleX = 3;
+    this.three.scaleY = 0.3;
+    this.three.scaleX = 0.3;
     this.three.x = 470;
 
 
 
     this.four.y = 420;
-    this.four.scaleY = 3;
-    this.four.scaleX = 3;
+    this.four.scaleY = 0.3;
+    this.four.scaleX = 0.3;
     this.four.x = 470;
 
 
     this.five.y = 500;
-    this.five.scaleY = 3;
-    this.five.scaleX = 3;
+    this.five.scaleY = 0.3;
+    this.five.scaleX = 0.3;
     this.five.x = 470;
 
     this.stage.addChild(this.one);

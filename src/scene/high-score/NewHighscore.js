@@ -13,7 +13,7 @@
  * 
  * Menu state.
  */
-pearlcatch.scene.NewHighscore = function (score) {
+pearlcatch.scene.NewHighscore = function(score) {
     this.highscore = score;
     this.row1 = [];
     this.row2 = [];
@@ -47,22 +47,22 @@ pearlcatch.scene.NewHighscore.prototype.constructor = pearlcatch.scene.NewHighsc
 // Override public prototype methods (ENGINE)
 //------------------------------------------------------------------------------
 
-pearlcatch.scene.NewHighscore.prototype.init = function () {
+pearlcatch.scene.NewHighscore.prototype.init = function() {
     rune.scene.Scene.prototype.init.call(this);
     this.m_initBackground();
-    this.username = new rune.text.BitmapField("");
+    this.username = new pearlcatch.entity.OrangeFont(" ");
     this.stage.addChild(this.username);
     this.username.y = 190;
     this.username.x = 460;
-    this.username.scaleY = 7;
-    this.username.scaleX = 7;
+    this.username.scaleY = 0.5;
+    this.username.scaleX = 0.5;
 
     this.m_initKeyboard();
     this.loopButtons(this.marked, this.markedRow);
 };
 
 
-pearlcatch.scene.NewHighscore.prototype.update = function (step) {
+pearlcatch.scene.NewHighscore.prototype.update = function(step) {
     if (this.keyboard.justPressed("RIGHT")) {
         if (this.marked !== 10) {
             this.m_initWav();
@@ -77,7 +77,7 @@ pearlcatch.scene.NewHighscore.prototype.update = function (step) {
     if (this.keyboard.justPressed("LEFT")) {
         if (this.marked !== 0) {
             this.m_initWav();
-            this.marked += - 1;
+            this.marked += -1;
             this.loopButtons(this.marked, this.markedRow);
         } else {
             return;
@@ -99,7 +99,7 @@ pearlcatch.scene.NewHighscore.prototype.update = function (step) {
     if (this.keyboard.justPressed("UP")) {
         if (this.markedRow !== 1) {
             this.m_initWav();
-            this.markedRow += - 1;
+            this.markedRow += -1;
             this.loopButtons(this.marked, this.markedRow);
         } else {
             return;
@@ -108,14 +108,14 @@ pearlcatch.scene.NewHighscore.prototype.update = function (step) {
 
     if (this.keyboard.justPressed("ENTER")) {
         if (this.enterClick == 8 && this.markedRow !== 3 && this.marked !== 10 && this.markedRow !== 3 && this.marked !== 9) {
-            this.warning = new rune.text.BitmapField("Please note that you can only have 8 characters in your username"); 
+            this.warning = new pearlcatch.entity.OrangeFont("Please note that you can only have 8 characters in your username");
             this.stage.addChild(this.warning);
             this.warning.y = 300;
             this.warning.x = 300;
-            this.warning.scaleY = 3;
-            this.warning.scaleX = 3;
-            
-          return
+            this.warning.scaleY = 0.15;
+            this.warning.scaleX = 0.15;
+
+            return
         }
         if (this.markedRow == 3 && this.marked == 10) {
             this.m_sendNewHighScore(this.user);
@@ -128,9 +128,7 @@ pearlcatch.scene.NewHighscore.prototype.update = function (step) {
             this.user.pop();
             var temp_username = this.username.text.slice(0, -1);
             this.username.text = temp_username;
-        }
-
-        else {
+        } else {
             this.enterClick += 1;
             this.m_writeText(this.markedRow, this.marked);
         }
@@ -138,7 +136,7 @@ pearlcatch.scene.NewHighscore.prototype.update = function (step) {
 
 };
 
-pearlcatch.scene.NewHighscore.prototype.loopButtons = function (letter, row) {
+pearlcatch.scene.NewHighscore.prototype.loopButtons = function(letter, row) {
     var row = row;
     var letter = letter;
 
@@ -200,7 +198,7 @@ pearlcatch.scene.NewHighscore.prototype.loopButtons = function (letter, row) {
 
 
 
-pearlcatch.scene.NewHighscore.prototype.m_writeText = function (row, letter) {
+pearlcatch.scene.NewHighscore.prototype.m_writeText = function(row, letter) {
     this.row = row;
     this.letter = letter;
 
@@ -222,7 +220,7 @@ pearlcatch.scene.NewHighscore.prototype.m_writeText = function (row, letter) {
 
 }
 
-pearlcatch.scene.NewHighscore.prototype.m_initBackground = function () {
+pearlcatch.scene.NewHighscore.prototype.m_initBackground = function() {
     this.m_background = new rune.display.Graphic(
         0,
         0,
@@ -235,25 +233,25 @@ pearlcatch.scene.NewHighscore.prototype.m_initBackground = function () {
 };
 
 
-pearlcatch.scene.NewHighscore.prototype.dispose = function () {
+pearlcatch.scene.NewHighscore.prototype.dispose = function() {
     rune.scene.Scene.prototype.dispose.call(this);
 };
 
 
-pearlcatch.scene.NewHighscore.prototype.m_createName = function (letter) {
+pearlcatch.scene.NewHighscore.prototype.m_createName = function(letter) {
     this.letters = letter;
 
     this.username.text += this.letters;
 }
 
-pearlcatch.scene.NewHighscore.prototype.m_initWav = function () {
+pearlcatch.scene.NewHighscore.prototype.m_initWav = function() {
     this.application.sounds.music.volume = 0.3;
     var clickSound = this.application.sounds.music.get("buttonclick");
     clickSound.play();
 };
 
 
-pearlcatch.scene.NewHighscore.prototype.m_sendNewHighScore = function (name) {
+pearlcatch.scene.NewHighscore.prototype.m_sendNewHighScore = function(name) {
     this.name = "";
     for (var i = 0; i < name.length; i++) {
         this.name += name[i];
@@ -270,7 +268,7 @@ pearlcatch.scene.NewHighscore.prototype.m_sendNewHighScore = function (name) {
 //     Code for keyboard graphic
 //--------------------------------------------------------------------------------
 
-pearlcatch.scene.NewHighscore.prototype.m_initKeyboard = function () {
+pearlcatch.scene.NewHighscore.prototype.m_initKeyboard = function() {
     //rad 1
     this.m_Q = new rune.display.Graphic(
         0,
