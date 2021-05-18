@@ -102,8 +102,6 @@ pearlcatch.entity.Fish.prototype.update = function(step) {
 
 
     } else if (this.keyboard.pressed("UP")) {
-
-        console.log(this.y);
         if (this.y != 0.5) {
             this.y -= 2;
             this.rotation = -35;

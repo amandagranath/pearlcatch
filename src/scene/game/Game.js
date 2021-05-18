@@ -32,6 +32,8 @@ pearlcatch.scene.Game = function() {
     this.gameOverStop = false;
     this.pauseGameSound = false;
     this.soundIsOn = true;
+    this.clicked = 0;
+    this.pauseGame = false;
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -213,6 +215,8 @@ pearlcatch.scene.Game.prototype.update = function(step) {
     this.backgroundSound.play(false);
     this.m_initBubbleMoving();
     if (this.keyboard.justPressed("S")) {
+        this.m_initClickSound();
+        this.pauseGame = true;
         console.log("test")
         if (this.player.active) {
             for (var i = 0; i < this.sharks.length; i++) {
@@ -234,6 +238,7 @@ pearlcatch.scene.Game.prototype.update = function(step) {
             this.player.active = false;
         } else {
             this.player.active = true;
+            this.pauseGame = false;
             for (var i = 0; i < this.sharks.length; i++) {
                 this.sharks[i].active = true;
                 if (this.gameOverFlag == true) {
@@ -254,11 +259,14 @@ pearlcatch.scene.Game.prototype.update = function(step) {
     }
 
     if (this.keyboard.justPressed("P")) {
+        this.m_initClickSound();
         if (this.pauseGameSound == false) {
             this.pauseGameSound = true;
             this.themeSong.stop();
             this.backgroundSound.stop();
-        } else if (this.pauseGameSound == true) {
+        } 
+        
+        else if (this.pauseGameSound == true) {
             this.pauseGameSound = false;
             this.themeSong.play();
             this.backgroundSound.play();
@@ -293,8 +301,13 @@ pearlcatch.scene.Game.prototype.update = function(step) {
                     }
                     this.player.active = false;
                     this.gameOver = new pearlcatch.entity.GameOver();
+                    this.gameOver.scaleX = 0.8;
+                    this.gameOver.scaleY = 0.8;
                     this.gameOver.center = this.application.screen.center;
                     this.stage.addChild(this.gameOver);
+
+                    this.m_gameOver();
+
                     this.sharks.splice(i, 1);
                     this.stage.removeChild(this.sharks[i]);
                     if (this.gameOverFlag == false) {
@@ -373,6 +386,36 @@ pearlcatch.scene.Game.prototype.update = function(step) {
 
     }
 
+    if (this.keyboard.justPressed("RIGHT") && this.gameOverStop == true) {
+        this.m_initClickSound();
+        if (this.clicked == 1) {
+            return;
+        } else {
+            this.clicked += 1;
+            this.m_playButton.alpha = 0.8;
+            this.m_menuButton.alpha = 1;
+        }
+    }
+
+    if (this.keyboard.justPressed("LEFT") && this.gameOverStop == true) {
+        this.m_initClickSound();
+        if (this.clicked == 0) {
+            return;
+        } else {
+            this.clicked += -1;
+            this.m_playButton.alpha = 1;
+            this.m_menuButton.alpha = 0.8;
+        }
+    }
+
+    if (this.clicked == 0 && this.keyboard.justPressed("ENTER")) {
+        this.application.scenes.load([new pearlcatch.scene.Game()]);
+    }
+
+    if (this.clicked == 1 && this.keyboard.justPressed("ENTER")) {
+        this.application.scenes.load([new pearlcatch.scene.Menu()]);
+    }
+
 };
 
 /**
@@ -382,6 +425,11 @@ pearlcatch.scene.Game.prototype.dispose = function() {
     rune.scene.Scene.prototype.dispose.call(this);
 };
 
+pearlcatch.scene.Game.prototype.m_initClickSound = function () {
+    this.application.sounds.music.volume = 0.3;
+    var clickSound = this.application.sounds.music.get("buttonclick");
+    clickSound.play();
+};
 
 pearlcatch.scene.Game.prototype.createSharks = function(shark_size) {
     this.getSharkSize(shark_size);
@@ -484,4 +532,31 @@ pearlcatch.scene.Game.prototype.checkHighScore = function() {
 pearlcatch.scene.Game.prototype.sendHighscore = function() {
     this.themeSong.stop();
     this.application.scenes.load([new pearlcatch.scene.NewHighscore(this.finalScore)]);
+};
+
+pearlcatch.scene.Game.prototype.m_gameOver = function () {
+    this.m_playButton = new rune.display.Sprite(
+        460,
+        600,
+        170,
+        80,
+        "",
+        "play_button"
+    );
+
+    this.stage.addChild(this.m_playButton);
+
+
+    this.m_menuButton = new rune.display.Graphic(
+        650,
+        600,
+        170,
+        81,
+        "",
+        "menu_button"
+    );
+    this.stage.addChild(this.m_menuButton);
+
+    this.m_playButton.alpha = 1;
+    this.m_menuButton.alpha = 0.8;
 };

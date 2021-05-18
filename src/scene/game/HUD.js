@@ -63,7 +63,7 @@ pearlcatch.scene.HUD.prototype.init = function () {
         "sound_icon_2"
     );
     this.addChild(this.m_soundButton);*/
-    this.m_pausButton = new rune.display.Graphic(
+    /*this.m_pausButton = new rune.display.Graphic(
         1225,
         10,
         40,
@@ -71,7 +71,7 @@ pearlcatch.scene.HUD.prototype.init = function () {
         "",
         "paus_button_2"
     );
-    this.addChild(this.m_pausButton);
+    this.addChild(this.m_pausButton);*/
     this.m_initScore();
 
 
@@ -107,6 +107,31 @@ pearlcatch.scene.HUD.prototype.update = function (step) {
         );
 
         this.addChild(this.m_soundButton);
+    } 
+
+    if (this.gamescope.pauseGame == true) {
+        console.log("pausat");
+        this.m_pausButton = new rune.display.Graphic(
+            1225,
+            10,
+            40,
+            38,
+            "",
+            "play_icon_2"
+        );
+        this.addChild(this.m_pausButton);
+
+    } else if (this.gamescope.pauseGame == false) {
+        console.log("igång");
+        this.m_pausButton = new rune.display.Graphic(
+            1225,
+            10,
+            40,
+            39,
+            "",
+            "paus_button_2"
+        );
+        this.addChild(this.m_pausButton);
     } 
 };
 
