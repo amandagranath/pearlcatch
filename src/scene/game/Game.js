@@ -215,7 +215,7 @@ pearlcatch.scene.Game.prototype.m_initStarSound = function() {
     }
 };
 pearlcatch.scene.Game.prototype.m_initWaveSound = function() {
-    this.application.sounds.music.volume = 1.0;
+    this.application.sounds.music.volume = 8.0;
     this.waveSound = this.application.sounds.music.get("wavesound");
     if (this.pauseGameSound == true) {
         return;
@@ -228,10 +228,11 @@ pearlcatch.scene.Game.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
     //   this.themeSong.play(false);
     // this.backgroundSound.play(false);
-    this.level += 1;
-    console.log(this.level);
+    if (this.gameOverStop == false){
+        this.level += 1;
+    }
+    
     if (this.level == 1) {
-        console.log("level 1");
         this.speed = 1.5;
         this.m_initWaveSound();
         this.wave = new pearlcatch.entity.Levels("wave1");
@@ -239,7 +240,6 @@ pearlcatch.scene.Game.prototype.update = function(step) {
         this.stage.addChild(this.wave);
     }
     if (this.level == 1800) {
-        console.log("level 2");
         //här ska sjöstjärnan börja komma
         this.speed = 1.5;
         this.m_initWaveSound();
@@ -249,7 +249,6 @@ pearlcatch.scene.Game.prototype.update = function(step) {
 
     }
     if (this.level == 3600) {
-        console.log("level 3");
         this.speed = 1.8;
         this.m_initWaveSound();
         this.wave = new pearlcatch.entity.Levels("wave3");
@@ -257,7 +256,6 @@ pearlcatch.scene.Game.prototype.update = function(step) {
         this.stage.addChild(this.wave);
     }
     if (this.level == 5400) {
-        console.log("level 4");
         this.speed = 2.0;
         this.m_initWaveSound();
         this.wave = new pearlcatch.entity.Levels("wave4");
@@ -265,7 +263,6 @@ pearlcatch.scene.Game.prototype.update = function(step) {
         this.stage.addChild(this.wave);
     }
     if (this.level == 7200) {
-        console.log("level 5");
         this.speed = 2.5;
         this.m_initWaveSound();
         this.wave = new pearlcatch.entity.Levels("wave5");
@@ -273,7 +270,6 @@ pearlcatch.scene.Game.prototype.update = function(step) {
         this.stage.addChild(this.wave);
     }
     if (this.level == 9000) {
-        console.log("level 6");
         //hajen börjar lägga sig i höjd med spelaren
         this.speed = 3.0;
         this.m_initWaveSound();
@@ -282,7 +278,6 @@ pearlcatch.scene.Game.prototype.update = function(step) {
         this.stage.addChild(this.wave);
     }
     if (this.level == 10800) {
-        console.log("level 7");
         //stjöstjärnan kommer oftare
         this.speed = 3.5;
         this.m_initWaveSound();
@@ -291,7 +286,6 @@ pearlcatch.scene.Game.prototype.update = function(step) {
         this.stage.addChild(this.wave);
     }
     if (this.level == 12600) {
-        console.log("level 8");
         this.speed = 4.0;
         this.m_initWaveSound();
         this.wave = new pearlcatch.entity.Levels("wave8");
@@ -299,7 +293,6 @@ pearlcatch.scene.Game.prototype.update = function(step) {
         this.stage.addChild(this.wave);
     }
     if (this.level == 14400) {
-        console.log("level 9");
         this.speed = 4.5;
         this.m_initWaveSound();
         this.wave = new pearlcatch.entity.Levels("wave9");
@@ -307,7 +300,6 @@ pearlcatch.scene.Game.prototype.update = function(step) {
         this.stage.addChild(this.wave);
     }
     if (this.level == 16200) {
-        console.log("level 10");
         this.speed = 5.0;
         this.m_initWaveSound();
         this.wave = new pearlcatch.entity.Levels("wave10");

@@ -39,7 +39,7 @@ pearlcatch.entity.Points = function (gameScope, points) {
     }
 
     if (this.points == 1000) {
-        rune.display.Sprite.call(this, 0, 0, 71, 19, "", "1000_minus");
+        rune.display.Sprite.call(this, 0, 0, 75, 19, "", "200_minus");
     }
 };
 

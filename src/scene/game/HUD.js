@@ -110,7 +110,6 @@ pearlcatch.scene.HUD.prototype.update = function(step) {
     }
 
     if (this.gamescope.pauseGame == true) {
-        console.log("pausat");
         this.m_pausButton = new rune.display.Graphic(
             1225,
             10,
@@ -122,7 +121,6 @@ pearlcatch.scene.HUD.prototype.update = function(step) {
         this.addChild(this.m_pausButton);
 
     } else if (this.gamescope.pauseGame == false) {
-        console.log("igång");
         this.m_pausButton = new rune.display.Graphic(
             1225,
             10,

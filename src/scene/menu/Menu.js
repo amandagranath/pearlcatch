@@ -45,7 +45,7 @@ pearlcatch.scene.Menu.prototype.init = function() {
     this.m_initMenuBackground();
     this.m_initBackgroundSound();
     this.m_initPlayButton();
-    this.m_initBestScore();
+    this.m_initHighScore();
     this.m_initCredits();
     this.m_deactivateBtn();
     this.m_activeBtn = "play";
@@ -87,17 +87,17 @@ pearlcatch.scene.Menu.prototype.m_initPlayButton = function() {
     this.buttons.push(this.m_playButton);
 };
 
-pearlcatch.scene.Menu.prototype.m_initBestScore = function() {
-    this.m_bestScoreButton = new rune.display.Sprite(
+pearlcatch.scene.Menu.prototype.m_initHighScore = function() {
+    this.m_highScoreButton = new rune.display.Sprite(
         560,
         400,
         170,
         81,
         "",
-        "best_score_button"
+        "high_score_button"
     );
-    this.stage.addChild(this.m_bestScoreButton);
-    this.buttons.push(this.m_bestScoreButton);
+    this.stage.addChild(this.m_highScoreButton);
+    this.buttons.push(this.m_highScoreButton);
 };
 
 pearlcatch.scene.Menu.prototype.m_initCredits = function() {

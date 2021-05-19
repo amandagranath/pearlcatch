@@ -58,7 +58,7 @@ pearlcatch.entity.Starfish.prototype.init = function() {
                 scope: this,
                 oncomplete: function(obj) {
                     obj.parent.removeChild(obj);
-                    this.gameScope.totalScore = this.gameScope.totalScore += -1000;
+                    this.gameScope.totalScore = this.gameScope.totalScore += -200;
                     this.gameScope.hud.score.text = this.gameScope.totalScore.toString();
                     var displayPoints = new pearlcatch.entity.Points(this, 1000);
                     this.gameScope.stage.addChild(displayPoints);
