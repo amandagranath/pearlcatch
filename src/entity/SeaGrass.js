@@ -47,9 +47,6 @@ pearlcatch.entity.SeaGrass.prototype.init = function() {
     this.animations.add("swim", [0, 1, 2, 3, 4], 6, true);
 
 
-    //  this.m_obj = new rune.display.Sprite(650, 650, 64, 30, "#ffffff");
-    //this.stage.addChild(this.m_obj);
-
 
 };
 

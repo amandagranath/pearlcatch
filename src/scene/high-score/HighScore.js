@@ -42,8 +42,7 @@ pearlcatch.scene.HighScore.prototype.init = function() {
     this.m_initHighscoreSound();
     rune.scene.Scene.prototype.init.call(this);
 
-    var rocket = new pearlcatch.entity.Rocket();
-    this.stage.addChild(rocket);
+
     this.one = "1." + " " + this.application.highscores.get(0, 0).name.toString() + " " + this.application.highscores.get(0, 0).score.toString();
     this.two = "2." + " " + this.application.highscores.get(1, 0).name.toString() + " " + this.application.highscores.get(1, 0).score.toString();
     this.three = "3." + " " + this.application.highscores.get(2, 0).name.toString() + " " + this.application.highscores.get(2, 0).score.toString();
