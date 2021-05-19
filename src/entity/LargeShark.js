@@ -65,4 +65,5 @@ pearlcatch.entity.LargeShark.prototype.update = function(step) {
  */
 pearlcatch.entity.LargeShark.prototype.dispose = function() {
     rune.display.Sprite.prototype.dispose.call(this);
+    console.log("large bort");
 };

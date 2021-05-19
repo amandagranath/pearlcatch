@@ -76,4 +76,5 @@ pearlcatch.entity.Squid.prototype.update = function(step) {
  */
 pearlcatch.entity.Squid.prototype.dispose = function() {
     rune.display.Sprite.prototype.dispose.call(this);
+    console.log("squid bort");
 };

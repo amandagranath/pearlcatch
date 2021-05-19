@@ -13,10 +13,11 @@
  * 
  * Game state.
  */
-pearlcatch.entity.Levels = function(wave, player) {
+pearlcatch.entity.Levels = function(wave, gamescope) {
     this.wave = wave;
     this.timers = null;
     this.tweens = null;
+    this.gamescope = gamescope;
     //this.player = player;
     //console.log(this.player);
 
@@ -58,6 +59,8 @@ pearlcatch.entity.Levels.prototype.init = function() {
                 scope: this,
                 oncomplete: function(obj) {
                     obj.parent.removeChild(obj);
+                    this.gamescope.stage.removeChild(obj, true);
+
                 }
             })
         }

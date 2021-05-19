@@ -71,4 +71,5 @@ pearlcatch.entity.MediumShark.prototype.update = function(step) {
  */
 pearlcatch.entity.MediumShark.prototype.dispose = function() {
     rune.display.Sprite.prototype.dispose.call(this);
+    console.log("medium bort");
 };

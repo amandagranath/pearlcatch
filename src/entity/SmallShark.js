@@ -69,4 +69,5 @@ pearlcatch.entity.SmallShark.prototype.update = function(step) {
  */
 pearlcatch.entity.SmallShark.prototype.dispose = function() {
     rune.display.Sprite.prototype.dispose.call(this);
+    console.log("liten haj");
 };

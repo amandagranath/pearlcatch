@@ -64,6 +64,9 @@ pearlcatch.entity.Starfish.prototype.init = function() {
                     this.gameScope.stage.addChild(displayPoints);
                     displayPoints.x = 800;
                     displayPoints.y = 50;
+
+                    this.gameScope.stage.removeChild(obj, true);
+                    this.gameScope.stars.splice(obj, 1);
                 }
             })
         }

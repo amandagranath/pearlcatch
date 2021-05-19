@@ -69,4 +69,5 @@ pearlcatch.entity.Pearl.prototype.update = function(step) {
  */
 pearlcatch.entity.Pearl.prototype.dispose = function() {
     rune.display.Sprite.prototype.dispose.call(this);
+    console.log("liten pärla");
 };
