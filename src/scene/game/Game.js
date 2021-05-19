@@ -2,6 +2,8 @@
 // Constructor scope
 //------------------------------------------------------------------------------
 
+
+
 /**
  * Creates a new object.
  *
@@ -34,6 +36,9 @@ pearlcatch.scene.Game = function() {
     this.soundIsOn = true;
     this.clicked = 0;
     this.pauseGame = false;
+    this.level = 0;
+    this.speed = 0;
+
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -77,6 +82,7 @@ pearlcatch.scene.Game.prototype.init = function() {
     this.stage.addChild(this.player);
     this.stage.addChild(this.enemy);
     this.stage.addChild(this.squid);
+
     //  this.m_obj = new rune.display.Sprite(650, 650, 64, 30, "#ffffff");
     //this.stage.addChild(this.m_obj);
     this.hud = new pearlcatch.scene.HUD(this);
@@ -208,11 +214,106 @@ pearlcatch.scene.Game.prototype.m_initStarSound = function() {
         this.powerUpSound.play();
     }
 };
+pearlcatch.scene.Game.prototype.m_initWaveSound = function() {
+    this.application.sounds.music.volume = 1.0;
+    this.waveSound = this.application.sounds.music.get("wavesound");
+    if (this.pauseGameSound == true) {
+        return;
+    } else {
+        this.waveSound.play();
+    }
+};
 
 pearlcatch.scene.Game.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
-    this.themeSong.play(false);
-    this.backgroundSound.play(false);
+    //   this.themeSong.play(false);
+    // this.backgroundSound.play(false);
+    this.level += 1;
+    console.log(this.level);
+    if (this.level == 1) {
+        console.log("level 1");
+        this.speed = 1.5;
+        this.m_initWaveSound();
+        this.wave = new pearlcatch.entity.Levels("wave1");
+        this.wave.center = this.application.screen.center;
+        this.stage.addChild(this.wave);
+    }
+    if (this.level == 1800) {
+        console.log("level 2");
+        //här ska sjöstjärnan börja komma
+        this.speed = 1.5;
+        this.m_initWaveSound();
+        this.wave = new pearlcatch.entity.Levels("wave2");
+        this.wave.center = this.application.screen.center;
+        this.stage.addChild(this.wave);
+
+    }
+    if (this.level == 3600) {
+        console.log("level 3");
+        this.speed = 1.8;
+        this.m_initWaveSound();
+        this.wave = new pearlcatch.entity.Levels("wave3");
+        this.wave.center = this.application.screen.center;
+        this.stage.addChild(this.wave);
+    }
+    if (this.level == 5400) {
+        console.log("level 4");
+        this.speed = 2.0;
+        this.m_initWaveSound();
+        this.wave = new pearlcatch.entity.Levels("wave4");
+        this.wave.center = this.application.screen.center;
+        this.stage.addChild(this.wave);
+    }
+    if (this.level == 7200) {
+        console.log("level 5");
+        this.speed = 2.5;
+        this.m_initWaveSound();
+        this.wave = new pearlcatch.entity.Levels("wave5");
+        this.wave.center = this.application.screen.center;
+        this.stage.addChild(this.wave);
+    }
+    if (this.level == 9000) {
+        console.log("level 6");
+        //hajen börjar lägga sig i höjd med spelaren
+        this.speed = 3.0;
+        this.m_initWaveSound();
+        this.wave = new pearlcatch.entity.Levels("wave6");
+        this.wave.center = this.application.screen.center;
+        this.stage.addChild(this.wave);
+    }
+    if (this.level == 10800) {
+        console.log("level 7");
+        //stjöstjärnan kommer oftare
+        this.speed = 3.5;
+        this.m_initWaveSound();
+        this.wave = new pearlcatch.entity.Levels("wave7");
+        this.wave.center = this.application.screen.center;
+        this.stage.addChild(this.wave);
+    }
+    if (this.level == 12600) {
+        console.log("level 8");
+        this.speed = 4.0;
+        this.m_initWaveSound();
+        this.wave = new pearlcatch.entity.Levels("wave8");
+        this.wave.center = this.application.screen.center;
+        this.stage.addChild(this.wave);
+    }
+    if (this.level == 14400) {
+        console.log("level 9");
+        this.speed = 4.5;
+        this.m_initWaveSound();
+        this.wave = new pearlcatch.entity.Levels("wave9");
+        this.wave.center = this.application.screen.center;
+        this.stage.addChild(this.wave);
+    }
+    if (this.level == 16200) {
+        console.log("level 10");
+        this.speed = 5.0;
+        this.m_initWaveSound();
+        this.wave = new pearlcatch.entity.Levels("wave10");
+        this.wave.center = this.application.screen.center;
+        this.stage.addChild(this.wave);
+    }
     this.m_initBubbleMoving();
     if (this.keyboard.justPressed("S")) {
         this.m_initClickSound();
@@ -264,9 +365,7 @@ pearlcatch.scene.Game.prototype.update = function(step) {
             this.pauseGameSound = true;
             this.themeSong.stop();
             this.backgroundSound.stop();
-        } 
-        
-        else if (this.pauseGameSound == true) {
+        } else if (this.pauseGameSound == true) {
             this.pauseGameSound = false;
             this.themeSong.play();
             this.backgroundSound.play();
@@ -425,7 +524,7 @@ pearlcatch.scene.Game.prototype.dispose = function() {
     rune.scene.Scene.prototype.dispose.call(this);
 };
 
-pearlcatch.scene.Game.prototype.m_initClickSound = function () {
+pearlcatch.scene.Game.prototype.m_initClickSound = function() {
     this.application.sounds.music.volume = 0.3;
     var clickSound = this.application.sounds.music.get("buttonclick");
     clickSound.play();
@@ -445,16 +544,16 @@ pearlcatch.scene.Game.prototype.createSharks = function(shark_size) {
 
 pearlcatch.scene.Game.prototype.getSharkSize = function(shark_size) {
     if (shark_size == "small") {
-        return this.shark = new pearlcatch.entity.SmallShark(this.totalScore);
+        return this.shark = new pearlcatch.entity.SmallShark(this.speed);
 
     }
 
     if (shark_size == "medium") {
-        return this.shark = new pearlcatch.entity.MediumShark(this.totalScore);
+        return this.shark = new pearlcatch.entity.MediumShark(this.speed);
     }
 
     if (shark_size == "big") {
-        return this.shark = new pearlcatch.entity.LargeShark(this.totalScore);
+        return this.shark = new pearlcatch.entity.LargeShark(this.speed);
     }
 };
 
@@ -534,7 +633,7 @@ pearlcatch.scene.Game.prototype.sendHighscore = function() {
     this.application.scenes.load([new pearlcatch.scene.NewHighscore(this.finalScore)]);
 };
 
-pearlcatch.scene.Game.prototype.m_gameOver = function () {
+pearlcatch.scene.Game.prototype.m_gameOver = function() {
     this.m_playButton = new rune.display.Sprite(
         460,
         600,

@@ -13,8 +13,8 @@
  * 
  * Game state.
  */
-pearlcatch.entity.MediumShark = function(totalScore) {
-    this.totalScore = totalScore;
+pearlcatch.entity.MediumShark = function(speed) {
+    this.speed = speed;
 
     //--------------------------------------------------------------------------
     // Super call
@@ -25,7 +25,7 @@ pearlcatch.entity.MediumShark = function(totalScore) {
      */
     //rune.display.Sprite.call(this, 0, 0, 290, 163, "", "medium_shark");
     rune.display.Sprite.call(this, 0, 0, 352, 233, "", "big_shark_sprite_8");
-    
+
 };
 
 //------------------------------------------------------------------------------
@@ -62,20 +62,8 @@ pearlcatch.entity.MediumShark.prototype.init = function() {
 pearlcatch.entity.MediumShark.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
 
-    this.x -= 1.5;
-    if (this.totalScore >= 1000) {
-        this.x -= 3.5;
-    }
-    if (this.totalScore >= 2000) {
-        this.x -= 4.5;
-    }
-    if (this.totalScore >= 3000) {
-        this.x -= 5.5;
-    }
+    this.x -= this.speed;
 
-    if (this.keyboard.justPressed("space")) {
-        this.application.scenes.load([new pearlcatch.scene.Game()]);
-    }
 };
 
 /**
