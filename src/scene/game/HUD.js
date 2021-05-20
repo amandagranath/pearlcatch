@@ -84,53 +84,53 @@ pearlcatch.scene.HUD.prototype.update = function(step) {
     rune.display.DisplayObjectContainer.prototype.update.call(this, step);
     //@TODO: Write app code.
 
-    if (this.gamescope.pauseGameSound == true) {
-        this.m_soundButton = new rune.display.Graphic(
-            1170,
-            10,
-            40,
-            39,
-            "",
-            "sound_icon_off_3"
-        );
+    /*   if (this.gamescope.pauseGameSound == true) {
+           this.m_soundButton = new rune.display.Graphic(
+               1170,
+               10,
+               40,
+               39,
+               "",
+               "sound_icon_off_3"
+           );
 
-        this.addChild(this.m_soundButton);
+           this.addChild(this.m_soundButton);
 
-    } else if (this.gamescope.pauseGameSound == false) {
-        this.m_soundButton = new rune.display.Graphic(
-            1170,
-            10,
-            40,
-            39,
-            "",
-            "sound_icon_3"
-        );
+       } else if (this.gamescope.pauseGameSound == false) {
+           this.m_soundButton = new rune.display.Graphic(
+               1170,
+               10,
+               40,
+               39,
+               "",
+               "sound_icon_3"
+           );
 
-        this.addChild(this.m_soundButton);
-    }
+           this.addChild(this.m_soundButton);
+       }*/
 
-    if (this.gamescope.pauseGame == true) {
-        this.m_pausButton = new rune.display.Graphic(
-            1225,
-            10,
-            40,
-            38,
-            "",
-            "play_icon_2"
-        );
-        this.addChild(this.m_pausButton);
+    /*   if (this.gamescope.pauseGame == true) {
+           this.m_pausButton = new rune.display.Graphic(
+               1225,
+               10,
+               40,
+               38,
+               "",
+               "play_icon_2"
+           );
+           this.addChild(this.m_pausButton);
 
-    } else if (this.gamescope.pauseGame == false) {
-        this.m_pausButton = new rune.display.Graphic(
-            1225,
-            10,
-            40,
-            39,
-            "",
-            "paus_button_2"
-        );
-        this.addChild(this.m_pausButton);
-    }
+       } else if (this.gamescope.pauseGame == false) {
+           this.m_pausButton = new rune.display.Graphic(
+               1225,
+               10,
+               40,
+               39,
+               "",
+               "paus_button_2"
+           );
+           this.addChild(this.m_pausButton);
+       }*/
 };
 
 /**
