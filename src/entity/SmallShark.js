@@ -42,7 +42,7 @@ pearlcatch.entity.SmallShark.prototype.constructor = pearlcatch.entity.SmallShar
  */
 pearlcatch.entity.SmallShark.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
-    this.hitbox.set(15, 50, 300, 150);
+    this.hitbox.set(20, 40, 320, 130);
     this.animations.add("swim", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 10, true);
 
     this.scaleX = 0.5;

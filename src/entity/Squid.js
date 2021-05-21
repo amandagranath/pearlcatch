@@ -64,8 +64,6 @@ pearlcatch.entity.Squid.prototype.init = function() {
 
 pearlcatch.entity.Squid.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
-    //this.m_player2.y = Math.floor(Math.random() * 200) + 1;
-
     this.x -= 1.5;
     this.rotation = -45;
 

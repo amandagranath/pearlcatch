@@ -74,14 +74,14 @@ pearlcatch.scene.Game.prototype.init = function() {
     this.m_initWav();
 
     this.player = new pearlcatch.entity.Fish(this.enemy);
-    this.enemy = new pearlcatch.entity.SmallShark(this.player, 100);
-    this.pearl = new pearlcatch.entity.Pearl(this.player, 100);
-    this.squid = new pearlcatch.entity.Squid(this.player, 100);
+    //  this.enemy = new pearlcatch.entity.SmallShark(this.player, 100);
+    //this.pearl = new pearlcatch.entity.Pearl(this.player, 100);
+    //this.squid = new pearlcatch.entity.Squid(this.player, 100);
     this.cameras.getCamera(0).fillColor = "#ade8f4";
 
     this.stage.addChild(this.player);
-    this.stage.addChild(this.enemy);
-    this.stage.addChild(this.squid);
+    //this.stage.addChild(this.enemy);
+    //this.stage.addChild(this.squid);
 
     //  this.m_obj = new rune.display.Sprite(650, 650, 64, 30, "#ffffff");
     //this.stage.addChild(this.m_obj);
@@ -93,7 +93,7 @@ pearlcatch.scene.Game.prototype.m_initCamera = function() {
     this.m_camera = this.cameras.add(this.cameras.create());
     this.cameras.getCamera(0).fade.opacity = 1.0;
     this.cameras.getCamera(0).fade.in(1500);
-    this.cameras.getCamera(0).debug = false;
+    this.cameras.getCamera(0).debug = true;
 };
 
 
@@ -307,7 +307,7 @@ pearlcatch.scene.Game.prototype.update = function(step) {
         this.stage.addChild(this.wave);
     }
     this.m_initBubbleMoving();
-    if (this.keyboard.justPressed("S")) {
+    if (this.keyboard.justPressed("SPACE")) {
         this.m_initClickSound();
         this.pauseGame = true;
         console.log("test")
@@ -390,15 +390,19 @@ pearlcatch.scene.Game.prototype.update = function(step) {
                     for (var i = 0; i < this.stars.length; i++) {
                         this.stars[i].active = false;
                     }
+                    this.m_seagrass.active = false;
+                    this.m_SecondSeagrass.active = false;
+                    this.m_miniBubble.active = false;
+                    this.m_miniBubble2.active = false;
                     this.player.active = false;
+                    this.themeSong.stop();
+                    this.backgroundSound.stop();
                     this.gameOver = new pearlcatch.entity.GameOver();
                     this.gameOver.scaleX = 0.8;
                     this.gameOver.scaleY = 0.8;
                     this.gameOver.center = this.application.screen.center;
                     this.stage.addChild(this.gameOver);
-
                     this.m_gameOver();
-
                     this.sharks.splice(i, 1);
                     this.stage.removeChild(this.sharks[i]);
                     if (this.gameOverFlag == false) {

@@ -63,32 +63,54 @@ pearlcatch.entity.Fish.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
     //this.m_player2.y = Math.floor(Math.random() * 200) + 1;
 
-    if (this.y != 687.5) {
-        this.y += 0.5;
-        // this.y += 2;
-        //this.flippedY = false;
-        //this.rotation = 35;
-        this.animations.gotoAndPlay("idle");
+    /*   if (this.y != 687.5) {
+           this.y += 0.5;
+           this.animations.gotoAndPlay("idle");
 
 
-    } else {
-        this.y = 687.5;
-    }
+       } else {
+           this.y = 687.5;
+       }
 
+       if (this.y != 10) {
+           this.y -= 0.5;
+           this.animations.gotoAndPlay("idle");
+
+
+       } else {
+           this.y = 10;
+       }
+       if (this.x != 10) {
+           console.log(this.x);
+           this.x -= 0.5;
+           this.animations.gotoAndPlay("idle");
+
+
+       } else {
+           this.x = 10;
+       }*/
     if (this.keyboard.pressed("RIGHT")) {
-        this.rotation = 0;
-        this.x += 2;
-        this.flippedX = false;
-        this.animations.gotoAndPlay("swim");
+        if (this.x != 1180) {
+            this.rotation = 0;
+            this.x += 2;
+            this.flippedX = false;
+            this.animations.gotoAndPlay("swim");
+        } else {
+            this.x = 1180;
+        }
     }
     if (this.keyboard.pressed("LEFT")) {
-        this.rotation = 0;
-        this.x -= 2;
-        this.flippedX = true;
-        this.animations.gotoAndPlay("swim");
+        if (this.x != 10) {
+            this.rotation = 0;
+            this.x -= 2;
+            this.flippedX = true;
+            this.animations.gotoAndPlay("swim");
+        } else {
+            this.x = 10;
+        }
     }
     if (this.keyboard.pressed("DOWN")) {
-        if (this.y != 687.5) {
+        if (this.y != 672) {
             this.y += 2;
             this.flippedY = false;
             this.rotation = 35;
@@ -96,22 +118,24 @@ pearlcatch.entity.Fish.prototype.update = function(step) {
 
 
         } else {
-            this.y = 687.5;
+            this.y = 672;
         }
 
 
 
     } else if (this.keyboard.pressed("UP")) {
-        if (this.y != 0.5) {
+        if (this.y != 10) {
             this.y -= 2;
             this.rotation = -35;
+            this.animations.gotoAndPlay("idle");
 
         } else {
-            this.y = 0.5;
+            this.y = 10;
+
 
         }
 
-        this.animations.gotoAndPlay("idle");
+
 
     }
 };
