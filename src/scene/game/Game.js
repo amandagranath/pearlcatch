@@ -458,11 +458,12 @@ pearlcatch.scene.Game.prototype.update = function(step) {
         }
 
         this.starfishInterval -= step;
-        if (this.starfishInterval < 0) {
-            this.starfishInterval = 30000;
-            this.createStarfish();
+        if (this.level >= 1800) {
+            if (this.starfishInterval < 0) {
+                this.starfishInterval = 30000;
+                this.createStarfish();
+            }
         }
-
         // ---------------------------------- Ta bort objekt utanför rutan i x-led ---------------------------------------- //
 
         for (var s = 0; s < this.sharks.length; s++) {

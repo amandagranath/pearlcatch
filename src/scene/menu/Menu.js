@@ -43,6 +43,8 @@ pearlcatch.scene.Menu.prototype.constructor = pearlcatch.scene.Menu;
  */
 pearlcatch.scene.Menu.prototype.init = function() {
     this.m_initMenuBackground();
+    this.m_initBubbles();
+
     this.m_initBackgroundSound();
     this.m_initPlayButton();
     this.m_initHighScore();
@@ -66,7 +68,62 @@ pearlcatch.scene.Menu.prototype.m_initMenuBackground = function() {
     );
     this.stage.addChild(this.m_menuBackground);
 };
-
+pearlcatch.scene.Menu.prototype.m_initBubbles = function() {
+    this.m_largeBubble = new rune.display.Graphic(
+        100,
+        200,
+        50,
+        50,
+        "",
+        "bubblelarge"
+    );
+    this.stage.addChild(this.m_largeBubble);
+    this.m_smallMenuBubble = new rune.display.Graphic(
+        110,
+        280,
+        30,
+        30,
+        "",
+        "smallbubble"
+    );
+    this.stage.addChild(this.m_smallMenuBubble);
+    this.m_smallMenuBubble2 = new rune.display.Graphic(
+        940,
+        280,
+        30,
+        30,
+        "",
+        "smallbubble"
+    );
+    this.stage.addChild(this.m_smallMenuBubble2);
+    this.m_mediumBubble = new rune.display.Graphic(
+        1000,
+        200,
+        40,
+        40,
+        "",
+        "mediumbubble"
+    );
+    this.stage.addChild(this.m_mediumBubble);
+};
+pearlcatch.scene.Menu.prototype.m_initMovingBubblesMenu = function() {
+    this.m_largeBubble.y -= 0.3;
+    this.m_smallMenuBubble.y -= 0.3;
+    this.m_smallMenuBubble2.y -= 0.3;
+    this.m_mediumBubble.y -= 0.3;
+    if (this.m_largeBubble.y <= 150) {
+        this.m_largeBubble.y = 200;
+    }
+    if (this.m_smallMenuBubble.y <= 200) {
+        this.m_smallMenuBubble.y = 280;
+    }
+    if (this.m_mediumBubble.y <= 150) {
+        this.m_mediumBubble.y = 200;
+    }
+    if (this.m_smallMenuBubble2.y <= 200) {
+        this.m_smallMenuBubble2.y = 280;
+    }
+};
 pearlcatch.scene.Menu.prototype.m_initBackgroundSound = function() {
     this.application.sounds.music.volume = 1;
     this.background_music = this.application.sounds.music.get("backgroundwater");
@@ -144,7 +201,7 @@ pearlcatch.scene.Menu.prototype.m_deactivateBtn = function() {
  */
 pearlcatch.scene.Menu.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
-
+    this.m_initMovingBubblesMenu();
     if (this.keyboard.justPressed("DOWN")) {
         if (this.activated == 2) {
             return;
