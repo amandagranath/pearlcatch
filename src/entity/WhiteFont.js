@@ -11,7 +11,7 @@
  * @class
  * @classdesc
  * 
- * Represents game over text.
+ * Represents text for the score in the HUD
  */
 pearlcatch.entity.WhiteFont = function() {
 

@@ -11,9 +11,10 @@
  * @class
  * @classdesc
  * 
- * Game state.
+ * Respresent a shark i medium size
  */
 pearlcatch.entity.MediumShark = function(speed) {
+    //Public properties
     this.speed = speed;
 
     //--------------------------------------------------------------------------
@@ -23,7 +24,6 @@ pearlcatch.entity.MediumShark = function(speed) {
     /**
      * ...
      */
-    //rune.display.Sprite.call(this, 0, 0, 290, 163, "", "medium_shark");
     rune.display.Sprite.call(this, 0, 0, 352, 233, "", "big_shark_sprite_8");
 
 };
@@ -48,22 +48,14 @@ pearlcatch.entity.MediumShark.prototype.init = function() {
     this.animations.add("swim", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 10, true);
     this.scaleX = 0.7;
     this.scaleY = 0.7;
-
-
 };
-
-
 
 /**
  * @inheritDoc
  */
-
-
 pearlcatch.entity.MediumShark.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
-
     this.x -= this.speed;
-
 };
 
 /**
@@ -71,5 +63,4 @@ pearlcatch.entity.MediumShark.prototype.update = function(step) {
  */
 pearlcatch.entity.MediumShark.prototype.dispose = function() {
     rune.display.Sprite.prototype.dispose.call(this);
-    console.log("medium bort");
 };

@@ -11,10 +11,10 @@
  * @class
  * @classdesc
  * 
- * Game state.
+ * Represent a pearl in medium size
  */
-pearlcatch.entity.PearlMedium = function(player) {
-
+pearlcatch.entity.PearlMedium = function() {
+    //Public properties
     this.pearlScore = 300;
     //--------------------------------------------------------------------------
     // Super call
@@ -43,17 +43,11 @@ pearlcatch.entity.PearlMedium.prototype.constructor = pearlcatch.entity.PearlMed
 pearlcatch.entity.PearlMedium.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
     this.hitbox.set(0, 0, 83, 82);
-
-
 };
-
-
 
 /**
  * @inheritDoc
  */
-
-
 pearlcatch.entity.PearlMedium.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
     this.x -= 1.5;

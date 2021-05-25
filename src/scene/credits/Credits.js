@@ -11,9 +11,9 @@
  * @class
  * @classdesc
  * 
- * Menu state.
+ * Represent credits screen
  */
- pearlcatch.scene.Credits = function() {
+pearlcatch.scene.Credits = function() {
 
     //--------------------------------------------------------------------------
     // Super call
@@ -39,8 +39,6 @@ pearlcatch.scene.Credits.prototype.constructor = pearlcatch.scene.Credits;
 pearlcatch.scene.Credits.prototype.init = function() {
     this.m_initBackground();
     this.m_initMenuButton();
-
-
     rune.scene.Scene.prototype.init.call(this);
     this.cameras.getCamera(0).fillColor = "#90e0ef";
 };
@@ -53,7 +51,6 @@ pearlcatch.scene.Credits.prototype.update = function(step) {
         this.application.scenes.load([new pearlcatch.scene.Menu()]);
     }
 };
-
 
 pearlcatch.scene.Credits.prototype.m_initBackground = function() {
     this.m_creditsBackground = new rune.display.Graphic(
@@ -79,11 +76,9 @@ pearlcatch.scene.Credits.prototype.m_initMenuButton = function() {
     this.stage.addChild(this.m_menuButton);
 };
 
-
-
 /**
  * @inheritDoc
  */
- pearlcatch.scene.Menu.prototype.dispose = function() {
+pearlcatch.scene.Menu.prototype.dispose = function() {
     rune.scene.Scene.prototype.dispose.call(this);
 };

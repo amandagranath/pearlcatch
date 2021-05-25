@@ -19,9 +19,10 @@
   * @class
   * @classdesc
   *
-  * ...
+  * Gameover state
   */
  pearlcatch.scene.GameOver = function(totalScore) {
+     //Public properties
      this.highScoreList = [];
      this.totalScore = totalScore;
      //--------------------------------------------------------------------------
@@ -57,10 +58,7 @@
      );
      this.m_gameOver.center = this.application.screen.center;
      this.addChild(this.m_gameOver);
-     // console.log(this.totalScore);
      this.highScoreList.push(this.totalScore);
-     //console.log(this.highScoreList);
-
  };
 
  /**
@@ -68,7 +66,6 @@
   */
  pearlcatch.scene.GameOver.prototype.update = function(step) {
      rune.display.DisplayObjectContainer.prototype.update.call(this, step);
-     //@TODO: Write app code.
  };
 
  /**
@@ -76,5 +73,4 @@
   */
  pearlcatch.scene.GameOver.prototype.dispose = function() {
      rune.display.DisplayObjectContainer.prototype.dispose.call(this);
-     //@TODO: Write app code.
  };

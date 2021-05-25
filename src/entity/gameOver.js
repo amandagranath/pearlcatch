@@ -11,7 +11,7 @@
  * @class
  * @classdesc
  * 
- * Game state.
+ * Represent gameover graphic
  */
 pearlcatch.entity.GameOver = function() {
     //--------------------------------------------------------------------------

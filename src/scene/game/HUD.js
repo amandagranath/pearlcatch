@@ -16,9 +16,10 @@
  * @class
  * @classdesc
  *
- * ...
+ * Represent the HUD
  */
 pearlcatch.scene.HUD = function(gamescope) {
+    //Public properties
     this.score = null;
     this.gamescope = gamescope;
     //--------------------------------------------------------------------------
@@ -43,7 +44,6 @@ pearlcatch.scene.HUD.prototype.constructor = pearlcatch.scene.HUD;
  */
 pearlcatch.scene.HUD.prototype.init = function() {
     rune.display.DisplayObjectContainer.prototype.init.call(this);
-    //@TODO: Write app code.
     this.m_hud = new rune.display.Graphic(
         500,
         0,
@@ -54,27 +54,7 @@ pearlcatch.scene.HUD.prototype.init = function() {
     );
 
     this.addChild(this.m_hud);
-    /*this.m_soundButton = new rune.display.Graphic(
-        1170,
-        10,
-        40,
-        39,
-        "",
-        "sound_icon_2"
-    );
-    this.addChild(this.m_soundButton);*/
-    /*this.m_pausButton = new rune.display.Graphic(
-        1225,
-        10,
-        40,
-        39,
-        "",
-        "paus_button_2"
-    );
-    this.addChild(this.m_pausButton);*/
     this.m_initScore();
-
-
 };
 
 /**
@@ -82,55 +62,6 @@ pearlcatch.scene.HUD.prototype.init = function() {
  */
 pearlcatch.scene.HUD.prototype.update = function(step) {
     rune.display.DisplayObjectContainer.prototype.update.call(this, step);
-    //@TODO: Write app code.
-
-    /*   if (this.gamescope.pauseGameSound == true) {
-           this.m_soundButton = new rune.display.Graphic(
-               1170,
-               10,
-               40,
-               39,
-               "",
-               "sound_icon_off_3"
-           );
-
-           this.addChild(this.m_soundButton);
-
-       } else if (this.gamescope.pauseGameSound == false) {
-           this.m_soundButton = new rune.display.Graphic(
-               1170,
-               10,
-               40,
-               39,
-               "",
-               "sound_icon_3"
-           );
-
-           this.addChild(this.m_soundButton);
-       }*/
-
-    /*   if (this.gamescope.pauseGame == true) {
-           this.m_pausButton = new rune.display.Graphic(
-               1225,
-               10,
-               40,
-               38,
-               "",
-               "play_icon_2"
-           );
-           this.addChild(this.m_pausButton);
-
-       } else if (this.gamescope.pauseGame == false) {
-           this.m_pausButton = new rune.display.Graphic(
-               1225,
-               10,
-               40,
-               39,
-               "",
-               "paus_button_2"
-           );
-           this.addChild(this.m_pausButton);
-       }*/
 };
 
 /**
@@ -138,8 +69,8 @@ pearlcatch.scene.HUD.prototype.update = function(step) {
  */
 pearlcatch.scene.HUD.prototype.dispose = function() {
     rune.display.DisplayObjectContainer.prototype.dispose.call(this);
-    //@TODO: Write app code.
 };
+
 pearlcatch.scene.HUD.prototype.m_initScore = function() {
     this.score = new pearlcatch.entity.WhiteFont();
     this.score.y = 10;

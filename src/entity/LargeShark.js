@@ -11,7 +11,7 @@
  * @class
  * @classdesc
  * 
- * Game state.
+ * Represents a shark in large size
  */
 pearlcatch.entity.LargeShark = function(speed, player) {
     //this.totalScore = totalScore;
@@ -43,9 +43,7 @@ pearlcatch.entity.LargeShark.prototype.constructor = pearlcatch.entity.LargeShar
 pearlcatch.entity.LargeShark.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
     this.hitbox.set(20, 80, 310, 90);
-
     this.animations.add("swim", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 10, true);
-
 };
 
 
@@ -65,5 +63,4 @@ pearlcatch.entity.LargeShark.prototype.update = function(step) {
  */
 pearlcatch.entity.LargeShark.prototype.dispose = function() {
     rune.display.Sprite.prototype.dispose.call(this);
-    console.log("large bort");
 };

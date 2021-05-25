@@ -11,10 +11,11 @@
  * @class
  * @classdesc
  * 
- * Game state.
+ * Represent the powerup for the main character
  */
- pearlcatch.entity.Power = function(gameScope) {
-     this.gameScope = gameScope;
+pearlcatch.entity.Power = function(gameScope) {
+    //Public properties
+    this.gameScope = gameScope;
 
     //--------------------------------------------------------------------------
     // Super call
@@ -61,17 +62,12 @@ pearlcatch.entity.Power.prototype.init = function() {
             })
         }
     });
-
 };
-
 
 /**
  * @inheritDoc
  */
-
-
 pearlcatch.entity.Power.prototype.update = function(step) {
-    /*this.x -= 1.5;*/
     this.timers.update(step);
     this.tweens.update(step);
 };

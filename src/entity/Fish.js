@@ -11,7 +11,7 @@
  * @class
  * @classdesc
  * 
- * Game state.
+ * Represent the maincharacter
  */
 pearlcatch.entity.Fish = function(player) {
 
@@ -41,15 +41,7 @@ pearlcatch.entity.Fish.prototype.constructor = pearlcatch.entity.Fish;
  */
 pearlcatch.entity.Fish.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
-
-
     this.animations.add("swim", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], 15, true);
-
-
-    //  this.m_obj = new rune.display.Sprite(650, 650, 64, 30, "#ffffff");
-    //this.stage.addChild(this.m_obj);
-
-
 };
 
 
@@ -61,34 +53,6 @@ pearlcatch.entity.Fish.prototype.init = function() {
 
 pearlcatch.entity.Fish.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
-    //this.m_player2.y = Math.floor(Math.random() * 200) + 1;
-
-    /*   if (this.y != 687.5) {
-           this.y += 0.5;
-           this.animations.gotoAndPlay("idle");
-
-
-       } else {
-           this.y = 687.5;
-       }
-
-       if (this.y != 10) {
-           this.y -= 0.5;
-           this.animations.gotoAndPlay("idle");
-
-
-       } else {
-           this.y = 10;
-       }
-       if (this.x != 10) {
-           console.log(this.x);
-           this.x -= 0.5;
-           this.animations.gotoAndPlay("idle");
-
-
-       } else {
-           this.x = 10;
-       }*/
     if (this.keyboard.pressed("RIGHT")) {
         if (this.x != 1180) {
             this.rotation = 0;
@@ -115,13 +79,9 @@ pearlcatch.entity.Fish.prototype.update = function(step) {
             this.flippedY = false;
             this.rotation = 35;
             this.animations.gotoAndPlay("idle");
-
-
         } else {
             this.y = 672;
         }
-
-
 
     } else if (this.keyboard.pressed("UP")) {
         if (this.y != 10) {
@@ -131,12 +91,7 @@ pearlcatch.entity.Fish.prototype.update = function(step) {
 
         } else {
             this.y = 10;
-
-
         }
-
-
-
     }
 };
 

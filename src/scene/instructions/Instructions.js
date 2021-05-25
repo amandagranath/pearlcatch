@@ -11,7 +11,7 @@
  * @class
  * @classdesc
  * 
- * Menu state.
+ * Represents the instructions
  */
 pearlcatch.scene.Instructions = function() {
 
@@ -41,7 +41,6 @@ pearlcatch.scene.Instructions.prototype.constructor = pearlcatch.scene.Instructi
  */
 pearlcatch.scene.Instructions.prototype.init = function() {
     this.m_initMenuBackground();
-    //  pearlcatch.scene.Menu.prototype.m_initBackgroundSound();
     this.m_initPlayButton();
     this.m_initMenuButton();
     this.m_initMusic();
@@ -50,7 +49,6 @@ pearlcatch.scene.Instructions.prototype.init = function() {
     rune.scene.Scene.prototype.init.call(this);
     this.cameras.getCamera(0).fillColor = "#90e0ef";
 };
-
 
 pearlcatch.scene.Instructions.prototype.m_initMenuBackground = function() {
     this.m_menuBackground = new rune.display.Graphic(
@@ -70,7 +68,6 @@ pearlcatch.scene.Instructions.prototype.m_initMusic = function() {
     this.backgroundSong.play();
     this.backgroundSong.resume();
 }
-
 
 pearlcatch.scene.Instructions.prototype.m_initPlayButton = function() {
     this.m_playButton = new rune.display.Graphic(
@@ -117,7 +114,6 @@ pearlcatch.scene.Instructions.prototype.m_deactivateBtn = function() {
  */
 pearlcatch.scene.Instructions.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
-
     if (this.keyboard.justPressed("RIGHT")) {
         this.m_initWav();
         this.m_activeButton = "menu";

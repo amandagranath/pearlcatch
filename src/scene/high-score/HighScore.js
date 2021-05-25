@@ -11,7 +11,7 @@
  * @class
  * @classdesc
  * 
- * Menu state.
+ * Represent the highscore
  */
 pearlcatch.scene.HighScore = function() {
 
@@ -42,7 +42,6 @@ pearlcatch.scene.HighScore.prototype.init = function() {
     this.m_initHighscoreSound();
     rune.scene.Scene.prototype.init.call(this);
 
-
     this.one = "1." + " " + this.application.highscores.get(0, 0).name.toString() + " " + this.application.highscores.get(0, 0).score.toString();
     this.two = "2." + " " + this.application.highscores.get(1, 0).name.toString() + " " + this.application.highscores.get(1, 0).score.toString();
     this.three = "3." + " " + this.application.highscores.get(2, 0).name.toString() + " " + this.application.highscores.get(2, 0).score.toString();
@@ -60,25 +59,20 @@ pearlcatch.scene.HighScore.prototype.init = function() {
     this.one.y = 180;
     this.one.x = 470;
 
-
     this.two.scaleY = 0.3;
     this.two.scaleX = 0.3;
     this.two.y = 260;
     this.two.x = 470;
-
 
     this.three.y = 340;
     this.three.scaleY = 0.3;
     this.three.scaleX = 0.3;
     this.three.x = 470;
 
-
-
     this.four.y = 420;
     this.four.scaleY = 0.3;
     this.four.scaleX = 0.3;
     this.four.x = 470;
-
 
     this.five.y = 500;
     this.five.scaleY = 0.3;

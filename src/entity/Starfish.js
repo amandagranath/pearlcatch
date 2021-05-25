@@ -11,11 +11,11 @@
  * @class
  * @classdesc
  * 
- * Game state.
+ * Represent graphic for starfish
  */
 pearlcatch.entity.Starfish = function(gameScope) {
+    //Public properties
     this.gameScope = gameScope;
-
 
     //--------------------------------------------------------------------------
     // Super call
@@ -41,8 +41,6 @@ pearlcatch.entity.Starfish.prototype.constructor = pearlcatch.entity.Starfish;
 /**
  * @inheritDoc
  */
-
-
 pearlcatch.entity.Starfish.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
     this.hitbox.set(0, 0, 50, 48);
@@ -64,7 +62,6 @@ pearlcatch.entity.Starfish.prototype.init = function() {
                     this.gameScope.stage.addChild(displayPoints);
                     displayPoints.x = 800;
                     displayPoints.y = 50;
-
                     this.gameScope.stage.removeChild(obj, true);
                     this.gameScope.stars.splice(obj, 1);
                 }
@@ -73,12 +70,9 @@ pearlcatch.entity.Starfish.prototype.init = function() {
     });
 };
 
-
 /**
  * @inheritDoc
  */
-
-
 pearlcatch.entity.Starfish.prototype.update = function(step) {
     this.x -= 1.5;
     this.timers.update(step);

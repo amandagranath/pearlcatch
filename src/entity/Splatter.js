@@ -13,12 +13,11 @@
  * 
  * Game state.
  */
-pearlcatch.entity.Splatter = function(player) {
-
+pearlcatch.entity.Splatter = function() {
+    //Public properties
     this.timers = null;
     this.tweens = null;
-    //this.player = player;
-    //console.log(this.player);
+
 
     //--------------------------------------------------------------------------
     // Super call
@@ -46,7 +45,6 @@ pearlcatch.entity.Splatter.prototype.constructor = pearlcatch.entity.Splatter;
  */
 pearlcatch.entity.Splatter.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
-    this.initSplatterSound();
     this.tweens = new rune.tween.Tweens();
     this.timers = new rune.timer.Timers();
     this.timers.create({
@@ -63,22 +61,16 @@ pearlcatch.entity.Splatter.prototype.init = function() {
             })
         }
     });
-
     this.rotation = 45;
     this.tweens.add(this, {
         duration: 1000,
         rotation: 0
     })
-
 };
-
-
 
 /**
  * @inheritDoc
  */
-
-
 pearlcatch.entity.Splatter.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
     this.timers.update(step);
@@ -90,7 +82,4 @@ pearlcatch.entity.Splatter.prototype.update = function(step) {
  */
 pearlcatch.entity.Splatter.prototype.dispose = function() {
     rune.display.Sprite.prototype.dispose.call(this);
-};
-pearlcatch.entity.Splatter.prototype.initSplatterSound = function() {
-
 };

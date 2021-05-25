@@ -11,9 +11,10 @@
  * @class
  * @classdesc
  * 
- * Menu state.
+ * Menu state
  */
 pearlcatch.scene.Menu = function() {
+    //Public properties
     this.activated = 0;
     this.buttons = [];
 
@@ -44,7 +45,6 @@ pearlcatch.scene.Menu.prototype.constructor = pearlcatch.scene.Menu;
 pearlcatch.scene.Menu.prototype.init = function() {
     this.m_initMenuBackground();
     this.m_initBubbles();
-
     this.m_initBackgroundSound();
     this.m_initPlayButton();
     this.m_initHighScore();
@@ -53,7 +53,6 @@ pearlcatch.scene.Menu.prototype.init = function() {
     this.m_activeBtn = "play";
     rune.scene.Scene.prototype.init.call(this);
     this.cameras.getCamera(0).fillColor = "#90e0ef";
-    //this.application.highscores.clear();
 };
 
 
@@ -68,6 +67,7 @@ pearlcatch.scene.Menu.prototype.m_initMenuBackground = function() {
     );
     this.stage.addChild(this.m_menuBackground);
 };
+
 pearlcatch.scene.Menu.prototype.m_initBubbles = function() {
     this.m_largeBubble = new rune.display.Graphic(
         100,
@@ -106,6 +106,7 @@ pearlcatch.scene.Menu.prototype.m_initBubbles = function() {
     );
     this.stage.addChild(this.m_mediumBubble);
 };
+
 pearlcatch.scene.Menu.prototype.m_initMovingBubblesMenu = function() {
     this.m_largeBubble.y -= 0.3;
     this.m_smallMenuBubble.y -= 0.3;
@@ -124,6 +125,7 @@ pearlcatch.scene.Menu.prototype.m_initMovingBubblesMenu = function() {
         this.m_smallMenuBubble2.y = 280;
     }
 };
+
 pearlcatch.scene.Menu.prototype.m_initBackgroundSound = function() {
     this.application.sounds.music.volume = 1;
     this.background_music = this.application.sounds.music.get("backgroundwater");
@@ -177,14 +179,6 @@ pearlcatch.scene.Menu.prototype.m_initWav = function() {
 };
 
 pearlcatch.scene.Menu.prototype.m_deactivateBtn = function() {
-    /*if (this.m_activeBtn == "play") {
-        this.m_playButton.alpha = 1;
-        this.m_bestScoreButton.alpha = 0.7;
-    } else {
-        this.m_bestScoreButton.alpha = 1;
-        this.m_playButton.alpha = 0.7;
-    }*/
-
     for (var i = 0; i < this.buttons.length; i++) {
         if (this.buttons.indexOf(this.buttons[i]) !== this.activated) {
             this.buttons[i].alpha = 0.7;
@@ -194,7 +188,6 @@ pearlcatch.scene.Menu.prototype.m_deactivateBtn = function() {
         }
     }
 };
-
 
 /**
  * @inheritDoc
@@ -222,29 +215,6 @@ pearlcatch.scene.Menu.prototype.update = function(step) {
         }
     }
 
-    /*if (this.keyboard.justPressed("DOWN")) {
-        this.m_initWav();
-        this.m_activeBtn = "score";
-        this.m_deactivateBtn();
-
-    }
-
-    if (this.keyboard.justPressed("UP")) {
-        this.m_initWav();
-        this.m_activeBtn = "play";
-        this.m_deactivateBtn();
-    }
-
-    if (this.keyboard.justPressed("ENTER") && this.m_activeBtn == "play") {
-        this.m_initWav();
-        this.application.scenes.load([new pearlcatch.scene.Instructions(this.background_music)]);
-    }
-
-    if (this.keyboard.justPressed("ENTER") && this.m_activeBtn == "score") {
-        this.m_initWav();
-        this.application.scenes.load([new pearlcatch.scene.HighScore()]);
-    }*/
-
     if (this.keyboard.justPressed("ENTER")) {
         this.m_initWav();
 
@@ -263,8 +233,6 @@ pearlcatch.scene.Menu.prototype.update = function(step) {
     }
 
 };
-
-
 
 /**
  * @inheritDoc

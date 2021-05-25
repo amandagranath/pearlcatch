@@ -11,16 +11,14 @@
  * @class
  * @classdesc
  * 
- * Game state.
+ * Represents levels graphic
  */
 pearlcatch.entity.Levels = function(wave, gamescope) {
+    //Public properies;
     this.wave = wave;
     this.timers = null;
     this.tweens = null;
     this.gamescope = gamescope;
-    //this.player = player;
-    //console.log(this.player);
-
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -45,6 +43,9 @@ pearlcatch.entity.Levels.prototype.constructor = pearlcatch.entity.Levels;
 /**
  * @inheritDoc
  */
+/**
+ * Creates a timer and tween for the levels graphic. 
+ */
 pearlcatch.entity.Levels.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
     this.tweens = new rune.tween.Tweens();
@@ -65,22 +66,16 @@ pearlcatch.entity.Levels.prototype.init = function() {
             })
         }
     });
-
     this.rotation = 65;
     this.tweens.add(this, {
         duration: 1000,
         rotation: 0
     })
-
 };
-
-
 
 /**
  * @inheritDoc
  */
-
-
 pearlcatch.entity.Levels.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
     this.timers.update(step);

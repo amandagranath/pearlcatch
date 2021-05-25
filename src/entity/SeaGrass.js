@@ -11,7 +11,7 @@
  * @class
  * @classdesc
  * 
- * Game state.
+ * Respresent seagrass graphic placed on the gamestage
  */
 pearlcatch.entity.SeaGrass = function(player) {
 
@@ -41,26 +41,16 @@ pearlcatch.entity.SeaGrass.prototype.constructor = pearlcatch.entity.SeaGrass;
  */
 pearlcatch.entity.SeaGrass.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
-
     this.scaleX = 0.5;
     this.scaleY = 0.5;
     this.animations.add("swim", [0, 1, 2, 3, 4], 6, true);
-
-
-
 };
-
-
 
 /**
  * @inheritDoc
  */
-
-
 pearlcatch.entity.SeaGrass.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
-
-
 };
 
 /**

@@ -11,11 +11,10 @@
  * @class
  * @classdesc
  * 
- * Game state.
+ * Represent a pearl in large size
  */
-pearlcatch.entity.PearlLarge = function(player) {
-
-
+pearlcatch.entity.PearlLarge = function() {
+    //Public properties
     this.pearlScore = 100;
 
     //--------------------------------------------------------------------------
@@ -45,26 +44,16 @@ pearlcatch.entity.PearlLarge.prototype.constructor = pearlcatch.entity.PearlLarg
 pearlcatch.entity.PearlLarge.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
     this.hitbox.set(0, 0, 110, 106);
-
-    // this.animations.add("glow", [0, 1, 2, 3], 4, true);
-
-
 };
-
-
 
 /**
  * @inheritDoc
  */
-
-
 pearlcatch.entity.PearlLarge.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
-
     this.x -= 1.5;
     this.rotation += 1;
     this.animations.gotoAndPlay("glow");
-
 };
 
 /**

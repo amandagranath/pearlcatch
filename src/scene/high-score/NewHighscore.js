@@ -11,9 +11,10 @@
  * @class
  * @classdesc
  * 
- * Menu state.
+ * Represent the keyboard for highscore
  */
 pearlcatch.scene.NewHighscore = function(score) {
+    //Public properties
     this.highscore = score;
     this.row1 = [];
     this.row2 = [];
@@ -56,11 +57,9 @@ pearlcatch.scene.NewHighscore.prototype.init = function() {
     this.username.x = 460;
     this.username.scaleY = 0.5;
     this.username.scaleX = 0.5;
-
     this.m_initKeyboard();
     this.loopButtons(this.marked, this.markedRow);
 };
-
 
 pearlcatch.scene.NewHighscore.prototype.update = function(step) {
     if (this.keyboard.justPressed("RIGHT")) {
@@ -72,7 +71,6 @@ pearlcatch.scene.NewHighscore.prototype.update = function(step) {
             return;
         }
     }
-
 
     if (this.keyboard.justPressed("LEFT")) {
         if (this.marked !== 0) {
@@ -92,8 +90,6 @@ pearlcatch.scene.NewHighscore.prototype.update = function(step) {
         } else {
             return;
         }
-
-
     }
 
     if (this.keyboard.justPressed("UP")) {
@@ -114,7 +110,6 @@ pearlcatch.scene.NewHighscore.prototype.update = function(step) {
             this.warning.x = 300;
             this.warning.scaleY = 0.15;
             this.warning.scaleX = 0.15;
-
             return
         }
         if (this.markedRow == 3 && this.marked == 10) {
@@ -133,13 +128,11 @@ pearlcatch.scene.NewHighscore.prototype.update = function(step) {
             this.m_writeText(this.markedRow, this.marked);
         }
     }
-
 };
 
 pearlcatch.scene.NewHighscore.prototype.loopButtons = function(letter, row) {
     var row = row;
     var letter = letter;
-
     if (row == 1) {
         for (var j = 0; j < this.row1.length; j++) {
             if (this.row1.indexOf(this.row1[j]) !== letter) {
@@ -195,14 +188,9 @@ pearlcatch.scene.NewHighscore.prototype.loopButtons = function(letter, row) {
     }
 }
 
-
-
-
 pearlcatch.scene.NewHighscore.prototype.m_writeText = function(row, letter) {
     this.row = row;
     this.letter = letter;
-
-
     if (this.row == 1) {
         this.user.push(this.alphabet1[letter]);
         this.m_createName(this.alphabet1[letter]);
@@ -232,15 +220,12 @@ pearlcatch.scene.NewHighscore.prototype.m_initBackground = function() {
     this.stage.addChild(this.m_background);
 };
 
-
 pearlcatch.scene.NewHighscore.prototype.dispose = function() {
     rune.scene.Scene.prototype.dispose.call(this);
 };
 
-
 pearlcatch.scene.NewHighscore.prototype.m_createName = function(letter) {
     this.letters = letter;
-
     this.username.text += this.letters;
 }
 
@@ -250,7 +235,6 @@ pearlcatch.scene.NewHighscore.prototype.m_initWav = function() {
     clickSound.play();
 };
 
-
 pearlcatch.scene.NewHighscore.prototype.m_sendNewHighScore = function(name) {
     this.name = "";
     for (var i = 0; i < name.length; i++) {
@@ -259,7 +243,6 @@ pearlcatch.scene.NewHighscore.prototype.m_sendNewHighScore = function(name) {
 
     this.application.highscores.send(this.highscore, this.name, 0);
     this.application.scenes.load([new pearlcatch.scene.HighScore()]);
-
 }
 
 
@@ -269,7 +252,6 @@ pearlcatch.scene.NewHighscore.prototype.m_sendNewHighScore = function(name) {
 //--------------------------------------------------------------------------------
 
 pearlcatch.scene.NewHighscore.prototype.m_initKeyboard = function() {
-    //rad 1
     this.m_Q = new rune.display.Graphic(
         0,
         0,
@@ -312,7 +294,6 @@ pearlcatch.scene.NewHighscore.prototype.m_initKeyboard = function() {
     this.m_E.x = 410;
     this.row1.push(this.m_E);
 
-
     this.m_R = new rune.display.Graphic(
         0,
         0,
@@ -350,7 +331,6 @@ pearlcatch.scene.NewHighscore.prototype.m_initKeyboard = function() {
         "y"
     );
 
-
     this.stage.addChild(this.m_Y);
     this.m_Y.y = 400;
     this.m_Y.x = 620;
@@ -369,7 +349,6 @@ pearlcatch.scene.NewHighscore.prototype.m_initKeyboard = function() {
     this.m_U.y = 400;
     this.m_U.x = 690;
     this.row1.push(this.m_U);
-
 
     this.m_I = new rune.display.Graphic(
         0,
@@ -442,7 +421,6 @@ pearlcatch.scene.NewHighscore.prototype.m_initKeyboard = function() {
     this.m_A.y = 460;
     this.m_A.x = 280;
     this.row2.push(this.m_A);
-
 
     this.m_S = new rune.display.Graphic(
         0,
@@ -583,8 +561,6 @@ pearlcatch.scene.NewHighscore.prototype.m_initKeyboard = function() {
     this.m_3.y = 460;
     this.m_3.x = 980;
     this.row2.push(this.m_3);
-
-    //Rad tre
 
     this.m_Z = new rune.display.Graphic(
         0,

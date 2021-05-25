@@ -11,9 +11,10 @@
  * @class
  * @classdesc
  * 
- * Represents game over text.
+ * Represents a texture used in the creating a new highscore
  */
 pearlcatch.entity.OrangeFont = function(score) {
+    //Public properties
     this.score = score;
 
     //--------------------------------------------------------------------------

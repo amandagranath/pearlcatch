@@ -11,9 +11,10 @@
  * @class
  * @classdesc
  * 
- * Game state.
+ * Respresent seperate points
  */
-pearlcatch.entity.Points = function (gameScope, points) {
+pearlcatch.entity.Points = function(gameScope, points) {
+    //Public properties
     this.gameScope = gameScope;
     this.points = points;
 
@@ -25,7 +26,6 @@ pearlcatch.entity.Points = function (gameScope, points) {
     /**
      * ...
      */
-
     if (this.points == 500) {
         rune.display.Sprite.call(this, 0, 0, 75, 20, "", "500_points");
     }
@@ -59,19 +59,19 @@ pearlcatch.entity.Points.prototype.constructor = pearlcatch.entity.Points;
  */
 
 
-pearlcatch.entity.Points.prototype.init = function () {
+pearlcatch.entity.Points.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
     this.tweens = new rune.tween.Tweens();
     this.timers = new rune.timer.Timers();
     this.timers.create({
         duration: 500,
         scope: this,
-        onComplete: function () {
+        onComplete: function() {
             this.tweens.add(this, {
                 duration: 1000,
                 alpha: 0,
                 scope: this,
-                oncomplete: function (obj) {
+                oncomplete: function(obj) {
                     obj.parent.removeChild(obj);
                 }
             })
@@ -79,13 +79,10 @@ pearlcatch.entity.Points.prototype.init = function () {
     });
 };
 
-
 /**
  * @inheritDoc
  */
-
-
-pearlcatch.entity.Points.prototype.update = function (step) {
+pearlcatch.entity.Points.prototype.update = function(step) {
     this.timers.update(step);
     this.tweens.update(step);
 };
@@ -93,6 +90,6 @@ pearlcatch.entity.Points.prototype.update = function (step) {
 /**
  * @inheritDoc
  */
-pearlcatch.entity.Points.prototype.dispose = function () {
+pearlcatch.entity.Points.prototype.dispose = function() {
     rune.display.Sprite.prototype.dispose.call(this);
 };
