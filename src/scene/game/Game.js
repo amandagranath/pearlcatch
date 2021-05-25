@@ -226,8 +226,10 @@ pearlcatch.scene.Game.prototype.m_initWaveSound = function() {
 
 pearlcatch.scene.Game.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
-    //   this.themeSong.play(false);
-    // this.backgroundSound.play(false);
+    if (this.pauseGameSound == false) {
+        this.themeSong.play(false);
+        this.backgroundSound.play(false);
+    }
     if (this.gameOverStop == false) {
         this.level += 1;
     }
