@@ -138,6 +138,7 @@ pearlcatch.scene.NewHighscore.prototype.update = function(step) {
     }
 };
 
+
 pearlcatch.scene.NewHighscore.prototype.loopButtons = function(letter, row) {
     var row = row;
     var letter = letter;

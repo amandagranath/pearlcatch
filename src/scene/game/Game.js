@@ -532,6 +532,7 @@ pearlcatch.scene.Game.prototype.m_initClickSound = function() {
     this.application.sounds.music.volume = 0.3;
     var clickSound = this.application.sounds.music.get("buttonclick");
     clickSound.play();
+    this.application.sounds.music.volume = 1.0;
 };
 
 pearlcatch.scene.Game.prototype.createSharks = function(shark_size) {

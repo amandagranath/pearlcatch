@@ -232,6 +232,10 @@ pearlcatch.scene.Menu.prototype.update = function(step) {
         }
     }
 
+    if (this.keyboard.pressed("E") && this.keyboard.pressed("R")) {
+        this.application.highscores.clear();
+    }
+
 };
 
 /**
