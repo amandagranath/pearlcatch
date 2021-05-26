@@ -51,6 +51,14 @@ pearlcatch.scene.NewHighscore.prototype.constructor = pearlcatch.scene.NewHighsc
 pearlcatch.scene.NewHighscore.prototype.init = function() {
     rune.scene.Scene.prototype.init.call(this);
     this.m_initBackground();
+    this.currentHighscore = this.highscore.toString();
+    this.finalHighscore = "Score " + this.currentHighscore;
+    this.finalHighscore = new pearlcatch.entity.OrangeFont(this.finalHighscore);
+    this.stage.addChild(this.finalHighscore);
+    this.finalHighscore.x = 460;
+    this.finalHighscore.y = 110;
+    this.finalHighscore.scaleY = 0.5;
+    this.finalHighscore.scaleX = 0.5;
     this.username = new pearlcatch.entity.OrangeFont(" ");
     this.stage.addChild(this.username);
     this.username.y = 190;

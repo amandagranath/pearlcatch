@@ -40,7 +40,27 @@ pearlcatch.entity.GameOver.prototype.constructor = pearlcatch.entity.GameOver;
  */
 pearlcatch.entity.GameOver.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
+    this.tweens = new rune.tween.Tweens();
+    this.timers = new rune.timer.Timers();
+    this.timers.create({
+        duration: Infinity,
+        scope: this,
+        onComplete: function() {
+            this.tweens.add(this, {
 
+                alpha: 0,
+                scope: this,
+                oncomplete: function(obj) {
+                    obj.parent.addChild(obj);
+                }
+            })
+        }
+    });
+    this.rotation = 105;
+    this.tweens.add(this, {
+        duration: 2000,
+        rotation: 0
+    })
 };
 
 
@@ -53,7 +73,8 @@ pearlcatch.entity.GameOver.prototype.init = function() {
 pearlcatch.entity.GameOver.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
 
-
+    this.timers.update(step);
+    this.tweens.update(step);
 };
 
 /**
