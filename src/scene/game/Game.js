@@ -82,7 +82,7 @@ pearlcatch.scene.Game.prototype.m_initCamera = function() {
     this.m_camera = this.cameras.add(this.cameras.create());
     this.cameras.getCamera(0).fade.opacity = 1.0;
     this.cameras.getCamera(0).fade.in(1500);
-    this.cameras.getCamera(0).debug = true;
+    this.cameras.getCamera(0).debug = false;
 };
 
 /**
@@ -162,8 +162,10 @@ pearlcatch.scene.Game.prototype.m_initWav = function() {
 };
 
 pearlcatch.scene.Game.prototype.m_initPearlSound = function() {
-    this.application.sounds.music.volume = 0.2;
-    this.pearlSound = this.application.sounds.music.get("catch_pearl")
+    if (this.pearlSound == null) {
+        this.pearlSound = this.application.sounds.sound.get("catch_pearl")
+        this.pearlSound.volume = 0.2;
+    }
     if (this.pauseGameSound == true) {
         return;
     } else {
@@ -172,8 +174,10 @@ pearlcatch.scene.Game.prototype.m_initPearlSound = function() {
 };
 
 pearlcatch.scene.Game.prototype.m_initSharkSound = function() {
-    this.application.sounds.music.volume = 0.5;
-    this.sharkSound = this.application.sounds.music.get("sharksound2");
+    if (this.sharkSound == null) {
+        this.sharkSound = this.application.sounds.sound.get("sharksound2");
+        this.sharkSound.volume = 0.5;
+    }
     if (this.pauseGameSound == true) {
         return;
     } else {
@@ -182,8 +186,10 @@ pearlcatch.scene.Game.prototype.m_initSharkSound = function() {
 };
 
 pearlcatch.scene.Game.prototype.m_initSquidSound = function() {
-    this.application.sounds.music.volume = 0.2;
-    this.splatterSound = this.application.sounds.music.get("splatsound");
+    if (this.splatterSound == null) {
+        this.splatterSound = this.application.sounds.sound.get("splatsound");
+        this.splatterSound.volume = 0.2;
+    }
     if (this.pauseGameSound == true) {
         return;
     } else {
@@ -192,8 +198,10 @@ pearlcatch.scene.Game.prototype.m_initSquidSound = function() {
 };
 
 pearlcatch.scene.Game.prototype.m_initStarSound = function() {
-    this.application.sounds.music.volume = 0.1;
-    this.powerUpSound = this.application.sounds.music.get("powerupsound");
+    if (this.powerUpSound == null) {
+        this.powerUpSound = this.application.sounds.sound.get("powerupsound");
+        this.powerUpSound.volume = 0.1;
+    }
     if (this.pauseGameSound == true) {
         return;
     } else {
@@ -201,8 +209,10 @@ pearlcatch.scene.Game.prototype.m_initStarSound = function() {
     }
 };
 pearlcatch.scene.Game.prototype.m_initWaveSound = function() {
-    this.application.sounds.music.volume = 8.0;
-    this.waveSound = this.application.sounds.music.get("wavesound");
+    if (this.waveSound == null) {
+        this.waveSound = this.application.sounds.sound.get("wavesound");
+        this.waveSound.volume = 8.0;
+    }
     if (this.pauseGameSound == true) {
         return;
     } else {
@@ -237,21 +247,21 @@ pearlcatch.scene.Game.prototype.update = function(step) {
 
     }
     if (this.level == 3600) {
-        this.speed = 1.8;
+        this.speed = 2.5;
         this.m_initWaveSound();
         this.wave = new pearlcatch.entity.Levels("wave3", this);
         this.wave.center = this.application.screen.center;
         this.stage.addChild(this.wave);
     }
     if (this.level == 5400) {
-        this.speed = 2.0;
+        this.speed = 3.0;
         this.m_initWaveSound();
         this.wave = new pearlcatch.entity.Levels("wave4", this);
         this.wave.center = this.application.screen.center;
         this.stage.addChild(this.wave);
     }
     if (this.level == 7200) {
-        this.speed = 2.5;
+        this.speed = 3.5;
         this.m_initWaveSound();
         this.wave = new pearlcatch.entity.Levels("wave5", this);
         this.wave.center = this.application.screen.center;
@@ -259,7 +269,7 @@ pearlcatch.scene.Game.prototype.update = function(step) {
     }
     if (this.level == 9000) {
         //hajen börjar lägga sig i höjd med spelaren
-        this.speed = 3.0;
+        this.speed = 4.0;
         this.m_initWaveSound();
         this.wave = new pearlcatch.entity.Levels("wave6", this);
         this.wave.center = this.application.screen.center;
@@ -267,30 +277,65 @@ pearlcatch.scene.Game.prototype.update = function(step) {
     }
     if (this.level == 10800) {
         //stjöstjärnan kommer oftare
-        this.speed = 3.5;
+        this.speed = 4.5;
         this.m_initWaveSound();
         this.wave = new pearlcatch.entity.Levels("wave7", this);
         this.wave.center = this.application.screen.center;
         this.stage.addChild(this.wave);
     }
     if (this.level == 12600) {
-        this.speed = 4.0;
+        this.speed = 5.5;
         this.m_initWaveSound();
         this.wave = new pearlcatch.entity.Levels("wave8", this);
         this.wave.center = this.application.screen.center;
         this.stage.addChild(this.wave);
     }
     if (this.level == 14400) {
-        this.speed = 4.5;
+        this.speed = 6.0;
         this.m_initWaveSound();
         this.wave = new pearlcatch.entity.Levels("wave9", this);
         this.wave.center = this.application.screen.center;
         this.stage.addChild(this.wave);
     }
     if (this.level == 16200) {
-        this.speed = 5.0;
+        this.speed = 7.0;
         this.m_initWaveSound();
         this.wave = new pearlcatch.entity.Levels("wave10", this);
+        this.wave.center = this.application.screen.center;
+        this.stage.addChild(this.wave);
+    }
+    if (this.level == 18000) {
+        this.speed = 8.0;
+        this.m_initWaveSound();
+        this.wave = new pearlcatch.entity.Levels("wave11", this);
+        this.wave.center = this.application.screen.center;
+        this.stage.addChild(this.wave);
+    }
+    if (this.level == 19800) {
+        this.speed = 9.0;
+        this.m_initWaveSound();
+        this.wave = new pearlcatch.entity.Levels("wave12", this);
+        this.wave.center = this.application.screen.center;
+        this.stage.addChild(this.wave);
+    }
+    if (this.level == 21600) {
+        this.speed = 9.5;
+        this.m_initWaveSound();
+        this.wave = new pearlcatch.entity.Levels("wave13", this);
+        this.wave.center = this.application.screen.center;
+        this.stage.addChild(this.wave);
+    }
+    if (this.level == 23400) {
+        this.speed = 10.0;
+        this.m_initWaveSound();
+        this.wave = new pearlcatch.entity.Levels("wave14", this);
+        this.wave.center = this.application.screen.center;
+        this.stage.addChild(this.wave);
+    }
+    if (this.level == 25200) {
+        this.speed = 10.5;
+        this.m_initWaveSound();
+        this.wave = new pearlcatch.entity.Levels("wave15", this);
         this.wave.center = this.application.screen.center;
         this.stage.addChild(this.wave);
     }
