@@ -42,6 +42,7 @@ pearlcatch.scene.Instructions.prototype.constructor = pearlcatch.scene.Instructi
 pearlcatch.scene.Instructions.prototype.init = function() {
     this.m_initMenuBackground();
     this.m_initBubbles();
+
     this.m_initPlayButton();
     this.m_initMenuButton();
     this.m_initMusic();
@@ -134,7 +135,7 @@ pearlcatch.scene.Instructions.prototype.m_initBubbles = function() {
     this.m_miniBubble4.scaleX = 0.6;
     this.m_miniBubble4.scaleY = 0.6;
 
-    
+
     this.m_miniBubble5 = new rune.display.Graphic(
         420,
         170,
@@ -230,8 +231,8 @@ pearlcatch.scene.Instructions.prototype.m_deactivateBtn = function() {
 pearlcatch.scene.Instructions.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
 
-    this.m_initBubbleMoving();
-    
+
+
     if (this.keyboard.justPressed("RIGHT")) {
         this.m_initWav();
         this.m_activeButton = "menu";
@@ -253,6 +254,7 @@ pearlcatch.scene.Instructions.prototype.update = function(step) {
         this.m_initWav();
         this.application.scenes.load([new pearlcatch.scene.Menu()]);
     }
+    this.m_initBubbleMoving();
 };
 
 /**

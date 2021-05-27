@@ -194,7 +194,7 @@ pearlcatch.scene.Menu.prototype.m_deactivateBtn = function() {
  */
 pearlcatch.scene.Menu.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
-    this.m_initMovingBubblesMenu();
+
     if (this.keyboard.justPressed("DOWN")) {
         if (this.activated == 2) {
             return;
@@ -235,7 +235,7 @@ pearlcatch.scene.Menu.prototype.update = function(step) {
     if (this.keyboard.pressed("E") && this.keyboard.pressed("R")) {
         this.application.highscores.clear();
     }
-
+    this.m_initMovingBubblesMenu();
 };
 
 /**
