@@ -53,6 +53,7 @@ pearlcatch.entity.Fish.prototype.init = function() {
 
 pearlcatch.entity.Fish.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
+    this.rotation = 0;
     if (this.keyboard.pressed("RIGHT")) {
         if (this.x != 1180) {
             this.rotation = 0;

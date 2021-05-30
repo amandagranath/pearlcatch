@@ -42,7 +42,7 @@ pearlcatch.entity.Squid.prototype.constructor = pearlcatch.entity.Squid;
  */
 pearlcatch.entity.Squid.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
-    this.hitbox.set(20, 0, 70, 174);
+    this.hitbox.set(30, 0, 40, 174);
     this.animations.add("swim", [0, 1, 2, 3, 4], 6, true);
 };
 
