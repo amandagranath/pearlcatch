@@ -2,19 +2,11 @@
  // Constructor scope
  //------------------------------------------------------------------------------
 
- //const { TouchBarSlider } = require("electron");
-
  /**
   * Creates a new object.
   *
   * @constructor
   * @extends rune.display.DisplayObjectContainer
-  *
-  * @param {number} [x=0] ...
-  * @param {number} [y=0] ...
-  * @param {number} [width=0] ...
-  * @param {number} [height=0] ...
-  * @param {number} [fillColor=""] ...
   *
   * @class
   * @classdesc

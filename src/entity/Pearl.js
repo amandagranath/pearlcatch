@@ -13,7 +13,7 @@
  * 
  * Represent a pearl in small size
  */
-pearlcatch.entity.Pearl = function(player) {
+pearlcatch.entity.Pearl = function() {
     //Public properties
     this.pearlScore = 500;
     //--------------------------------------------------------------------------

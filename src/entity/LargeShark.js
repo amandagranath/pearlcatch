@@ -13,8 +13,7 @@
  * 
  * Represents a shark in large size
  */
-pearlcatch.entity.LargeShark = function(speed, player) {
-    //this.totalScore = totalScore;
+pearlcatch.entity.LargeShark = function(speed) {
     this.speed = speed;
     //--------------------------------------------------------------------------
     // Super call

@@ -42,7 +42,6 @@ pearlcatch.scene.Instructions.prototype.constructor = pearlcatch.scene.Instructi
 pearlcatch.scene.Instructions.prototype.init = function() {
     this.m_initMenuBackground();
     this.m_initBubbles();
-
     this.m_initPlayButton();
     this.m_initMenuButton();
     this.m_initMusic();
@@ -70,7 +69,6 @@ pearlcatch.scene.Instructions.prototype.m_initMusic = function() {
     this.backgroundSong.play();
     this.backgroundSong.resume();
 }
-
 
 pearlcatch.scene.Instructions.prototype.m_initBubbles = function() {
     this.m_smallBubble = new rune.display.Graphic(

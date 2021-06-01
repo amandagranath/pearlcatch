@@ -15,8 +15,8 @@
  */
 pearlcatch.scene.Menu = function() {
     //Public properties
-    this.activated = 0;
-    this.buttons = [];
+    this.activated = 0; //The current active button
+    this.buttons = []; //Array with the buttons
 
     //--------------------------------------------------------------------------
     // Super call

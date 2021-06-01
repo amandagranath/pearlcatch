@@ -15,18 +15,18 @@
  */
 pearlcatch.scene.NewHighscore = function(score) {
     //Public properties
-    this.highscore = score;
-    this.row1 = [];
-    this.row2 = [];
-    this.row3 = [];
-    this.alphabet1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "1"];
-    this.alphabet2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L", "2", "3"];
-    this.alphabet3 = ["Z", "X", "C", "V", "B", "N", "M", "-", "_", "erase", "save"];
-    this.user = [];
-    this.markedRow = 1;
-    this.marked = 0;
-    this.username;
-    this.enterClick = 0;
+    this.highscore = score; //The total score sent from game
+    this.row1 = []; //First row on the keyboard
+    this.row2 = []; //Second row on the keyboard
+    this.row3 = []; //Third row on the keyboard
+    this.alphabet1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "1"]; //Keys in the first row
+    this.alphabet2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L", "2", "3"]; //Keys in the seconds row
+    this.alphabet3 = ["Z", "X", "C", "V", "B", "N", "M", "-", "_", "erase", "save"]; //Keys in the third row
+    this.user = []; //The name that will be sent to the highscorelist
+    this.markedRow = 1; //The active row on the keyboard
+    this.marked = 0; //The active key on the keyboard
+    this.username; //The name that's written in on the keyboard
+    this.enterClick = 0; //Number of enterclicks
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -138,7 +138,9 @@ pearlcatch.scene.NewHighscore.prototype.update = function(step) {
     }
 };
 
-
+/**
+ * Loops through the keys and change opacity.
+ */
 pearlcatch.scene.NewHighscore.prototype.loopButtons = function(letter, row) {
     var row = row;
     var letter = letter;
@@ -197,6 +199,9 @@ pearlcatch.scene.NewHighscore.prototype.loopButtons = function(letter, row) {
     }
 }
 
+/**
+ * Sends in the letters to create name
+ */
 pearlcatch.scene.NewHighscore.prototype.m_writeText = function(row, letter) {
     this.row = row;
     this.letter = letter;
@@ -217,6 +222,9 @@ pearlcatch.scene.NewHighscore.prototype.m_writeText = function(row, letter) {
 
 }
 
+/**
+ * Creates the background
+ */
 pearlcatch.scene.NewHighscore.prototype.m_initBackground = function() {
     this.m_background = new rune.display.Graphic(
         0,
@@ -233,17 +241,26 @@ pearlcatch.scene.NewHighscore.prototype.dispose = function() {
     rune.scene.Scene.prototype.dispose.call(this);
 };
 
+/**
+ * Display the letters
+ */
 pearlcatch.scene.NewHighscore.prototype.m_createName = function(letter) {
     this.letters = letter;
     this.username.text += this.letters;
 }
 
+/**
+ * Init sound for the buttons
+ */
 pearlcatch.scene.NewHighscore.prototype.m_initWav = function() {
     this.application.sounds.music.volume = 0.3;
     var clickSound = this.application.sounds.music.get("buttonclick");
     clickSound.play();
 };
 
+/**
+ * Sends highscore to the highscorelist
+ */
 pearlcatch.scene.NewHighscore.prototype.m_sendNewHighScore = function(name) {
     this.name = "";
     for (var i = 0; i < name.length; i++) {
@@ -259,7 +276,6 @@ pearlcatch.scene.NewHighscore.prototype.m_sendNewHighScore = function(name) {
 //--------------------------------------------------------------------------------
 //     Code for keyboard graphic
 //--------------------------------------------------------------------------------
-
 pearlcatch.scene.NewHighscore.prototype.m_initKeyboard = function() {
     this.m_Q = new rune.display.Graphic(
         0,

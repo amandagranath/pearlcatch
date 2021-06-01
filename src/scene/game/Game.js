@@ -17,28 +17,27 @@
  */
 pearlcatch.scene.Game = function() {
     //Public properties
-    this.hud = null;
-    this.gameOver = null;
-    this.sharkInterval = 0;
-    this.sharks = [];
-    this.squids = [];
-    this.pearlInterval = 0;
-    this.score = [];
-    this.totalScore = 0;
-    this.squidInterval = 0;
-    this.starfishInterval = 0;
-    this.stars = [];
-    this.power = null;
-    this.entity_sizes = ["small", "medium", "big"];
-    this.finalScore = 0;
-    this.gameOverFlag = false;
-    this.gameOverStop = false;
-    this.pauseGameSound = false;
-    this.soundIsOn = true;
-    this.clicked = 0;
-    this.pauseGame = false;
-    this.level = 0;
-    this.speed = 0;
+    this.hud = null; //Variable for the hud.
+    this.gameOver = null; //Variable for game over
+    this.sharkInterval = 0; //Variable to save the number of sharks in an interval
+    this.sharks = []; //Array with all the sharks enerting the game
+    this.squids = []; //Array with all the squids entering the game
+    this.pearlInterval = 0; //Variable to save the number of pearls in an interval
+    this.score = []; //Array to save all the points of the pearls
+    this.totalScore = 0; //Sums up all the points
+    this.squidInterval = 0; //Variable to save the number of squids in an interval
+    this.starfishInterval = 0; //Variable to save the number of starfish in an interval
+    this.stars = []; //Array with all the stars entering the game
+    this.power = null; //Flag to check if the main characther get affected by enemies
+    this.entity_sizes = ["small", "medium", "big"]; //Sizes of objects
+    this.finalScore = 0; //The final sum of the score
+    this.gameOverFlag = false; //Flag to check if the game is in a game over state
+    this.gameOverStop = false; //Flag to decides if to continue creating objects for the game.
+    this.pauseGameSound = false; //Flag to pause the sound
+    this.clicked = 0; //To control the buttons in game over state
+    this.pauseGame = false; //Flag to be able to pause the game
+    this.level = 0; //Variable to all the levels
+    this.speed = 0; //Variable to the speed of the main character
 
     //--------------------------------------------------------------------------
     // Super call
@@ -64,6 +63,9 @@ pearlcatch.scene.Game.prototype.constructor = pearlcatch.scene.Game;
 /**
  * @inheritDoc
  */
+/**
+ * Inits methods for graphics, creating player, HUD, sounds and cameras.
+ */
 pearlcatch.scene.Game.prototype.init = function() {
     rune.scene.Scene.prototype.init.call(this);
     this.m_initBackground();
@@ -77,7 +79,9 @@ pearlcatch.scene.Game.prototype.init = function() {
     this.hud = new pearlcatch.scene.HUD(this);
     this.cameras.getCamera(0).addChild(this.hud);
 };
-
+/**
+ * Inits the camera of the game
+ */
 pearlcatch.scene.Game.prototype.m_initCamera = function() {
     this.m_camera = this.cameras.add(this.cameras.create());
     this.cameras.getCamera(0).fade.opacity = 1.0;
@@ -87,6 +91,9 @@ pearlcatch.scene.Game.prototype.m_initCamera = function() {
 
 /**
  * @inheritDoc
+ */
+/**
+ * Creates the background for the game
  */
 pearlcatch.scene.Game.prototype.m_initBackground = function() {
     this.m_background = new rune.display.Graphic(
@@ -100,16 +107,25 @@ pearlcatch.scene.Game.prototype.m_initBackground = function() {
     this.stage.addChild(this.m_background);
 };
 
+/**
+ * Creates seagrass
+ */
 pearlcatch.scene.Game.prototype.m_initSeagrass = function() {
     this.m_seagrass = new pearlcatch.entity.SeaGrass();
     this.stage.addChild(this.m_seagrass);
 };
 
+/**
+ * Creates another seagrass
+ */
 pearlcatch.scene.Game.prototype.m_initSecondSeagrass = function() {
     this.m_SecondSeagrass = new pearlcatch.entity.SecondSeaGrass();
     this.stage.addChild(this.m_SecondSeagrass);
 };
 
+/**
+ * Creates moving bubbles on top of the background
+ */
 pearlcatch.scene.Game.prototype.m_initBubbles = function() {
     this.m_smallBubble = new rune.display.Graphic(
         100,
@@ -149,6 +165,10 @@ pearlcatch.scene.Game.prototype.m_initBubbles = function() {
     this.stage.addChild(this.m_miniBubble2);
 };
 
+/**
+ * 
+ * Creates backgroundmusic and the themesong
+ */
 pearlcatch.scene.Game.prototype.m_initWav = function() {
     this.application.sounds.music.volume = 0.4;
     this.themeSong = this.application.sounds.music.get("themesong")
@@ -161,6 +181,10 @@ pearlcatch.scene.Game.prototype.m_initWav = function() {
     }
 };
 
+/**
+ * 
+ * Creates the sound of catching a pearl
+ */
 pearlcatch.scene.Game.prototype.m_initPearlSound = function() {
     if (this.pearlSound == null) {
         this.pearlSound = this.application.sounds.sound.get("catch_pearl")
@@ -173,6 +197,10 @@ pearlcatch.scene.Game.prototype.m_initPearlSound = function() {
     }
 };
 
+/**
+ * 
+ * Creates the sound when the player collides with a shark
+ */
 pearlcatch.scene.Game.prototype.m_initSharkSound = function() {
     if (this.sharkSound == null) {
         this.sharkSound = this.application.sounds.sound.get("sharksound2");
@@ -185,6 +213,10 @@ pearlcatch.scene.Game.prototype.m_initSharkSound = function() {
     }
 };
 
+/**
+ * 
+ * Creates the sound when the player hits a squid
+ */
 pearlcatch.scene.Game.prototype.m_initSquidSound = function() {
     if (this.splatterSound == null) {
         this.splatterSound = this.application.sounds.sound.get("splatsound");
@@ -197,6 +229,10 @@ pearlcatch.scene.Game.prototype.m_initSquidSound = function() {
     }
 };
 
+/**
+ * 
+ * Creates sound for power-up
+ */
 pearlcatch.scene.Game.prototype.m_initStarSound = function() {
     if (this.powerUpSound == null) {
         this.powerUpSound = this.application.sounds.sound.get("powerupsound");
@@ -208,6 +244,11 @@ pearlcatch.scene.Game.prototype.m_initStarSound = function() {
         this.powerUpSound.play();
     }
 };
+
+/**
+ * 
+ * Creates sound for each level
+ */
 pearlcatch.scene.Game.prototype.m_initWaveSound = function() {
     if (this.waveSound == null) {
         this.waveSound = this.application.sounds.sound.get("wavesound");
@@ -220,6 +261,14 @@ pearlcatch.scene.Game.prototype.m_initWaveSound = function() {
     }
 };
 
+/**
+ * 
+ * Contains all the logic in the game. 
+ * Creating all the objects enetering the game.
+ * Controls the sound and points.
+ * Checks if the player hits other objects.
+ * Checks game over.
+ */
 pearlcatch.scene.Game.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
     if (this.pauseGameSound == false) {
@@ -369,7 +418,7 @@ pearlcatch.scene.Game.prototype.update = function(step) {
         }
 
         if (this.sharkInterval < 0) {
-            this.sharkInterval = 4000;
+            this.sharkInterval = 5000;
             this.shark_size = this.entity_sizes[Math.floor(Math.random() * this.entity_sizes.length)];
             this.createSharks(this.shark_size);
         }
@@ -539,6 +588,9 @@ pearlcatch.scene.Game.prototype.dispose = function() {
     rune.scene.Scene.prototype.dispose.call(this);
 };
 
+/**
+ * Creates sound for the buttons in game over state
+ */
 pearlcatch.scene.Game.prototype.m_initClickSound = function() {
     this.application.sounds.music.volume = 0.3;
     var clickSound = this.application.sounds.music.get("buttonclick");
@@ -546,6 +598,10 @@ pearlcatch.scene.Game.prototype.m_initClickSound = function() {
     this.application.sounds.music.volume = 1.0;
 };
 
+/**
+ * 
+ * To create a shark on random y-position.
+ */
 pearlcatch.scene.Game.prototype.createSharks = function(shark_size) {
     this.getSharkSize(shark_size);
     var shark = this.shark;
@@ -556,6 +612,10 @@ pearlcatch.scene.Game.prototype.createSharks = function(shark_size) {
     this.stage.addChild(shark);
 };
 
+/**
+ * 
+ * Creates a shark in a specific size
+ */
 pearlcatch.scene.Game.prototype.getSharkSize = function(shark_size) {
     if (shark_size == "small") {
         return this.shark = new pearlcatch.entity.SmallShark(this.speed);
@@ -570,6 +630,9 @@ pearlcatch.scene.Game.prototype.getSharkSize = function(shark_size) {
     }
 };
 
+/**
+ * Creates a pearl on random y-position.
+ */
 pearlcatch.scene.Game.prototype.createPearl = function(pearl_size) {
     this.getPearlSize(pearl_size);
     var pearl = this.pearl;
@@ -579,6 +642,9 @@ pearlcatch.scene.Game.prototype.createPearl = function(pearl_size) {
     this.stage.addChild(pearl);
 };
 
+/**
+ * Creates a pearl in a specific size
+ */
 pearlcatch.scene.Game.prototype.getPearlSize = function(pearl_size) {
     if (pearl_size == "small") {
         return this.pearl = new pearlcatch.entity.Pearl();
@@ -593,6 +659,9 @@ pearlcatch.scene.Game.prototype.getPearlSize = function(pearl_size) {
     }
 };
 
+/**
+ * Creates a squid on random y-position.
+ */
 pearlcatch.scene.Game.prototype.createSquid = function() {
     var squid = new pearlcatch.entity.Squid();
     squid.y = rune.util.Math.random(0, 570);
@@ -601,6 +670,9 @@ pearlcatch.scene.Game.prototype.createSquid = function() {
     this.stage.addChild(squid);
 };
 
+/**
+ * Creates a starfish on random y-position
+ */
 pearlcatch.scene.Game.prototype.createStarfish = function() {
     var starfish = new pearlcatch.entity.Starfish(this);
     starfish.y = rune.util.Math.random(0, 570);
@@ -608,6 +680,10 @@ pearlcatch.scene.Game.prototype.createStarfish = function() {
     this.stars.push(starfish);
     this.stage.addChild(starfish);
 }
+
+/**
+ * Creates the movement of the bubbles
+ */
 pearlcatch.scene.Game.prototype.m_initBubbleMoving = function() {
     this.m_smallBubble.y -= 0.1;
     this.m_miniBubble.y -= 0.1;
@@ -627,17 +703,26 @@ pearlcatch.scene.Game.prototype.m_initBubbleMoving = function() {
     }
 };
 
+/**
+ * Method to check if the score is a highscore
+ */
 pearlcatch.scene.Game.prototype.checkHighScore = function() {
     if (this.application.highscores.test(this.finalScore, 0) == -1) {} else {
         this.sendHighscore();
     }
 }
 
+/**
+ * Method to send the highscore to the highscorelist
+ */
 pearlcatch.scene.Game.prototype.sendHighscore = function() {
     this.themeSong.stop();
     this.application.scenes.load([new pearlcatch.scene.NewHighscore(this.finalScore)]);
 };
 
+/**
+ * Graphic for the gameover sign
+ */
 pearlcatch.scene.Game.prototype.m_gameOver = function() {
     this.m_playButton = new rune.display.Sprite(
         460,

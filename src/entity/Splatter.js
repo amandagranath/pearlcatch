@@ -43,6 +43,9 @@ pearlcatch.entity.Splatter.prototype.constructor = pearlcatch.entity.Splatter;
 /**
  * @inheritDoc
  */
+/**
+ * Timer to make the splatter visible for 5 seconds and then fade outs
+ */
 pearlcatch.entity.Splatter.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
     this.tweens = new rune.tween.Tweens();

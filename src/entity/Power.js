@@ -42,7 +42,9 @@ pearlcatch.entity.Power.prototype.constructor = pearlcatch.entity.Power;
  * @inheritDoc
  */
 
-
+/**
+ * Timer for how long the power-up is active
+ */
 pearlcatch.entity.Power.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
     this.tweens = new rune.tween.Tweens();

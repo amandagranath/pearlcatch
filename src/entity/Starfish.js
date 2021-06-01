@@ -41,6 +41,10 @@ pearlcatch.entity.Starfish.prototype.constructor = pearlcatch.entity.Starfish;
 /**
  * @inheritDoc
  */
+
+/**
+ * Creates a timer and tween for how long the starfish should appear
+ */
 pearlcatch.entity.Starfish.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
     this.hitbox.set(0, 0, 50, 48);

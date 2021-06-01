@@ -58,7 +58,9 @@ pearlcatch.entity.Points.prototype.constructor = pearlcatch.entity.Points;
  * @inheritDoc
  */
 
-
+/**
+ * Timer for the points that is visible for a second
+ */
 pearlcatch.entity.Points.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
     this.tweens = new rune.tween.Tweens();
