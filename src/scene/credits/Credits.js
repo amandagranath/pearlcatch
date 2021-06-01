@@ -67,7 +67,7 @@ pearlcatch.scene.Credits.prototype.m_initBackground = function() {
 pearlcatch.scene.Credits.prototype.m_initMenuButton = function() {
     this.m_menuButton = new rune.display.Graphic(
         40,
-        600,
+        620,
         170,
         81,
         "",
