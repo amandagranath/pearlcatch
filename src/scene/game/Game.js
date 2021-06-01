@@ -86,7 +86,7 @@ pearlcatch.scene.Game.prototype.m_initCamera = function() {
     this.m_camera = this.cameras.add(this.cameras.create());
     this.cameras.getCamera(0).fade.opacity = 1.0;
     this.cameras.getCamera(0).fade.in(1500);
-    this.cameras.getCamera(0).debug = true;
+    this.cameras.getCamera(0).debug = false;
 };
 
 /**
