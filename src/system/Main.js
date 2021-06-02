@@ -17,7 +17,7 @@ pearlcatch.system.Main = function() {
         scene: pearlcatch.scene.Menu,
         resources: pearlcatch.data.Resources,
         useKeyboard: true,
-        debug: true,
+        debug: false,
         screenResolutionX: 1280,
         screenResolutionY: 720
     });
